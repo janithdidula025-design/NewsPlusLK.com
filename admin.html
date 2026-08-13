@@ -553,8 +553,7 @@ textarea {
    GOOGLE APPS SCRIPT API
    ========================================================= */
 
-const API_URL =
-    "https://script.google.com/macros/s/AKfycbzh-zk0QPQTvGaByS5fKcJ7w6mUXpMXMDeynMEJ6MusC5RCNh0BVVQmNd2qRDeoutqaJg/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbzh-zk0QPQTvGaByS5fKcJ7w6mUXpMXMDeynMEJ6MusC5RCNh0BVVQmNd2qRDeoutqaJg/exec";
 
 
 /* =========================================================
@@ -577,7 +576,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 /* =========================================================
-   TAB
+   TAB SWITCHING
    ========================================================= */
 
 function openTab(tabId, button) {
@@ -609,8 +608,8 @@ async function apiGet() {
         throw new Error("Server එකෙන් නිවැරදි JSON response එකක් ලැබුණේ නැහැ.");
     }
 
-    if (!data.success) {
-        throw new Error(data.error || "GET request failed");
+    if (data.error) {
+        throw new Error(data.error);
     }
 
     return data;
@@ -779,7 +778,7 @@ async function deleteArticle(id) {
 
 
 /* =========================================================
-   RESET ARTICLE
+   RESET ARTICLE FORM
    ========================================================= */
 
 function resetArticleForm() {
@@ -809,6 +808,7 @@ function renderArticles() {
         return;
     }
 
+    // නවතම ලිපි පලමුව පෙන්වීම (Sorting by updatedAt / date + time)
     const sorted = [...articles].sort((a, b) => {
         const timeA = new Date(a.updatedAt || (a.date ? `${a.date}T${a.time || '00:00'}` : 0)).getTime();
         const timeB = new Date(b.updatedAt || (b.date ? `${b.date}T${b.time || '00:00'}` : 0)).getTime();
@@ -835,7 +835,7 @@ function renderArticles() {
                     <div class="article-title">${title}</div>
                     <div class="article-desc">${desc}</div>
                     <div class="meta">
-                        ${date}${time ? " • " + time : ""}
+                        📅 ${date}${time ? " • ⏰ " + time : ""}
                     </div>
                     <div class="actions">
                         <button class="btn btn-secondary" onclick="editArticle('${escapeJs(article.id)}')">✏️ Edit</button>
@@ -897,7 +897,7 @@ async function saveTicker() {
             ticker: values
         });
 
-        showToast("✅ Ticker saved.");
+        showToast("✅ Ticker saved successfully.");
         await loadData();
     } catch (error) {
         showToast("❌ " + error.message);
@@ -994,7 +994,7 @@ async function saveAds() {
             ads: result
         });
 
-        showToast("✅ Ads saved.");
+        showToast("✅ Ads saved successfully.");
         await loadData();
     } catch (error) {
         showToast("❌ " + error.message);
@@ -1016,7 +1016,7 @@ function updateStats() {
 
 
 /* =========================================================
-   DATE / TIME
+   DATE / TIME HELPERS
    ========================================================= */
 
 function setDefaultDateTime() {
@@ -1056,7 +1056,7 @@ function normalizeTime(value) {
 
 
 /* =========================================================
-   UI
+   UI HELPERS
    ========================================================= */
 
 function showLoading(show) {
