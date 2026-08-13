@@ -594,10 +594,20 @@ function openTab(tabId, button) {
    ========================================================= */
 
 async function apiGet() {
-    const response = await fetch(API_URL, {
-        method: "GET",
-        cache: "no-store"
-    });
+    let response;
+    try {
+        response = await fetch(API_URL, {
+            method: "GET",
+            cache: "no-store",
+            redirect: "follow"
+        });
+    } catch (err) {
+        throw new Error("Network error: Server එකට සම්බන්ධ වීමට නොහැකි විය.");
+    }
+
+    if (!response.ok) {
+        throw new Error(`Server error: Status ${response.status}`);
+    }
 
     const text = await response.text();
     let data;
@@ -621,13 +631,23 @@ async function apiGet() {
    ========================================================= */
 
 async function apiPost(payload) {
-    const response = await fetch(API_URL, {
-        method: "POST",
-        headers: {
-            "Content-Type": "text/plain;charset=utf-8"
-        },
-        body: JSON.stringify(payload)
-    });
+    let response;
+    try {
+        response = await fetch(API_URL, {
+            method: "POST",
+            headers: {
+                "Content-Type": "text/plain;charset=utf-8"
+            },
+            body: JSON.stringify(payload),
+            redirect: "follow"
+        });
+    } catch (err) {
+        throw new Error("Network error: Data යැවීමට නොහැකි විය.");
+    }
+
+    if (!response.ok) {
+        throw new Error(`Server error: Status ${response.status}`);
+    }
 
     const text = await response.text();
     let data;
@@ -808,11 +828,14 @@ function renderArticles() {
         return;
     }
 
-    // නවතම ලිපි පලමුව පෙන්වීම (Sorting by updatedAt / date + time)
+    // නවතම ලිපි පලමුව පෙන්වීම (Safe Date Parsing)
     const sorted = [...articles].sort((a, b) => {
-        const timeA = new Date(a.updatedAt || (a.date ? `${a.date}T${a.time || '00:00'}` : 0)).getTime();
-        const timeB = new Date(b.updatedAt || (b.date ? `${b.date}T${b.time || '00:00'}` : 0)).getTime();
-        return timeB - timeA;
+        const getTime = (item) => {
+            const raw = item.updatedAt || (item.date ? `${item.date}T${item.time || '00:00'}` : '');
+            const t = new Date(raw).getTime();
+            return isNaN(t) ? 0 : t;
+        };
+        return getTime(b) - getTime(a);
     });
 
     container.innerHTML = sorted.map(article => {
@@ -822,6 +845,8 @@ function renderArticles() {
         const category = escapeHtml(article.category || "");
         const date = escapeHtml(article.date || "");
         const time = escapeHtml(article.time || "");
+
+        const safeId = escapeAttr(escapeJs(article.id));
 
         return `
             <div class="article-card">
@@ -838,8 +863,8 @@ function renderArticles() {
                         📅 ${date}${time ? " • ⏰ " + time : ""}
                     </div>
                     <div class="actions">
-                        <button class="btn btn-secondary" onclick="editArticle('${escapeJs(article.id)}')">✏️ Edit</button>
-                        <button class="btn btn-danger" onclick="deleteArticle('${escapeJs(article.id)}')">🗑 Delete</button>
+                        <button class="btn btn-secondary" onclick="editArticle('${safeId}')">✏️ Edit</button>
+                        <button class="btn btn-danger" onclick="deleteArticle('${safeId}')">🗑 Delete</button>
                     </div>
                 </div>
             </div>
