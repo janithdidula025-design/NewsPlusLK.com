@@ -1,0 +1,1618 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NewsPlusLK — Admin Panel</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f3f5f8;
+    color:#1f2937;
+}
+
+button,input,textarea,select{
+    font:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+.topbar{
+    background:#d71920;
+    color:#fff;
+    padding:16px 20px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    position:sticky;
+    top:0;
+    z-index:100;
+    box-shadow:0 3px 15px rgba(0,0,0,.15);
+}
+
+.logo{
+    font-size:22px;
+    font-weight:800;
+}
+
+.logo span{
+    display:block;
+    font-size:12px;
+    font-weight:500;
+    opacity:.85;
+    margin-top:3px;
+}
+
+.container{
+    max-width:1400px;
+    margin:auto;
+    padding:20px;
+}
+
+.tabs{
+    display:flex;
+    gap:8px;
+    background:#fff;
+    padding:8px;
+    border-radius:14px;
+    box-shadow:0 2px 10px rgba(0,0,0,.05);
+    margin-bottom:20px;
+    overflow-x:auto;
+}
+
+.tab{
+    border:0;
+    background:#f1f3f6;
+    padding:11px 18px;
+    border-radius:10px;
+    white-space:nowrap;
+    font-weight:700;
+    color:#374151;
+}
+
+.tab.active{
+    background:#d71920;
+    color:#fff;
+}
+
+.tab-content{
+    display:none;
+}
+
+.tab-content.active{
+    display:block;
+}
+
+.card{
+    background:#fff;
+    border-radius:16px;
+    padding:20px;
+    box-shadow:0 3px 15px rgba(0,0,0,.06);
+    margin-bottom:20px;
+}
+
+.card h2{
+    font-size:20px;
+    margin-bottom:16px;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:15px;
+}
+
+.full{
+    grid-column:1/-1;
+}
+
+label{
+    display:block;
+    font-size:14px;
+    font-weight:700;
+    margin-bottom:7px;
+}
+
+input,
+textarea,
+select{
+    width:100%;
+    border:1px solid #d5dae0;
+    border-radius:10px;
+    padding:12px;
+    background:#fff;
+    outline:none;
+    transition:.2s;
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+    border-color:#d71920;
+    box-shadow:0 0 0 3px rgba(215,25,32,.08);
+}
+
+textarea{
+    min-height:120px;
+    resize:vertical;
+}
+
+.btn-row{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-top:16px;
+}
+
+.btn{
+    border:0;
+    border-radius:10px;
+    padding:11px 16px;
+    font-weight:700;
+}
+
+.btn-primary{
+    background:#d71920;
+    color:#fff;
+}
+
+.btn-secondary{
+    background:#eef1f5;
+    color:#111827;
+}
+
+.btn-danger{
+    background:#b91c1c;
+    color:#fff;
+}
+
+.article-list{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+}
+
+.article-card{
+    border:1px solid #e5e7eb;
+    border-radius:14px;
+    overflow:hidden;
+    background:#fff;
+}
+
+.article-image{
+    width:100%;
+    height:180px;
+    object-fit:cover;
+    background:#eee;
+}
+
+.article-body{
+    padding:14px;
+}
+
+.article-category{
+    display:inline-block;
+    background:#d71920;
+    color:#fff;
+    padding:5px 9px;
+    border-radius:999px;
+    font-size:11px;
+    font-weight:700;
+    margin-bottom:8px;
+}
+
+.article-title{
+    font-size:17px;
+    font-weight:800;
+    line-height:1.35;
+    margin-bottom:8px;
+}
+
+.article-desc{
+    font-size:13px;
+    color:#6b7280;
+    line-height:1.5;
+}
+
+.meta{
+    font-size:11px;
+    color:#9ca3af;
+    margin-top:8px;
+}
+
+.actions{
+    display:flex;
+    gap:8px;
+    margin-top:12px;
+}
+
+.actions button{
+    flex:1;
+}
+
+.ticker-item{
+    display:flex;
+    gap:10px;
+    margin-bottom:10px;
+}
+
+.ticker-item input{
+    flex:1;
+}
+
+.ticker-remove{
+    width:44px;
+    border:0;
+    border-radius:10px;
+    background:#fee2e2;
+    color:#b91c1c;
+    font-weight:800;
+}
+
+.ads-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:16px;
+}
+
+.ad-box{
+    border:1px solid #e5e7eb;
+    border-radius:14px;
+    padding:16px;
+}
+
+.ad-box h3{
+    margin-bottom:12px;
+    color:#d71920;
+}
+
+.ad-preview{
+    width:100%;
+    height:180px;
+    border-radius:10px;
+    object-fit:cover;
+    background:#f1f1f1;
+    margin-top:10px;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+    margin-bottom:20px;
+}
+
+.stat{
+    background:#fff;
+    padding:20px;
+    border-radius:16px;
+    box-shadow:0 3px 15px rgba(0,0,0,.05);
+}
+
+.stat small{
+    color:#6b7280;
+}
+
+.stat strong{
+    display:block;
+    font-size:30px;
+    margin-top:5px;
+}
+
+.loading{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.45);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:999;
+}
+
+.loading.show{
+    display:flex;
+}
+
+.loader-box{
+    background:#fff;
+    border-radius:15px;
+    padding:25px 35px;
+    text-align:center;
+}
+
+.spinner{
+    width:35px;
+    height:35px;
+    border:4px solid #ddd;
+    border-top-color:#d71920;
+    border-radius:50%;
+    animation:spin .8s linear infinite;
+    margin:auto auto 12px;
+}
+
+@keyframes spin{
+    to{transform:rotate(360deg);}
+}
+
+.toast{
+    position:fixed;
+    right:20px;
+    bottom:20px;
+    background:#111827;
+    color:#fff;
+    padding:14px 18px;
+    border-radius:10px;
+    display:none;
+    z-index:1000;
+    max-width:350px;
+}
+
+.toast.show{
+    display:block;
+}
+
+.empty{
+    text-align:center;
+    padding:40px 20px;
+    color:#6b7280;
+}
+
+@media(max-width:900px){
+    .article-list{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .grid{
+        grid-template-columns:1fr;
+    }
+
+    .full{
+        grid-column:auto;
+    }
+
+    .ads-grid{
+        grid-template-columns:1fr;
+    }
+
+    .stats{
+        grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:600px){
+    .container{
+        padding:12px;
+    }
+
+    .article-list{
+        grid-template-columns:1fr;
+    }
+
+    .topbar{
+        padding:14px;
+    }
+
+    .logo{
+        font-size:18px;
+    }
+
+    .card{
+        padding:15px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header class="topbar">
+    <div class="logo">
+        NewsPlusLK
+        <span>Administration Panel</span>
+    </div>
+
+    <button class="btn btn-secondary" onclick="loadData()">
+        🔄 Refresh
+    </button>
+</header>
+
+<main class="container">
+
+    <div class="stats">
+        <div class="stat">
+            <small>ලිපි සංඛ්‍යාව</small>
+            <strong id="articleCount">0</strong>
+        </div>
+
+        <div class="stat">
+            <small>Ticker Messages</small>
+            <strong id="tickerCount">0</strong>
+        </div>
+
+        <div class="stat">
+            <small>Ads</small>
+            <strong id="adsCount">0</strong>
+        </div>
+    </div>
+
+    <div class="tabs">
+
+        <button class="tab active"
+                onclick="openTab('articles',this)">
+            📰 Articles
+        </button>
+
+        <button class="tab"
+                onclick="openTab('ticker',this)">
+            📢 Ticker
+        </button>
+
+        <button class="tab"
+                onclick="openTab('ads',this)">
+            📣 Ads
+        </button>
+
+    </div>
+
+    <section id="articles" class="tab-content active">
+
+        <div class="card">
+
+            <h2 id="articleFormTitle">
+                📝 නව පුවතක් එක් කරන්න
+            </h2>
+
+            <input type="hidden" id="articleId">
+
+            <div class="grid">
+
+                <div>
+                    <label>Category</label>
+                    <select id="category">
+                        <option value="breaking">Breaking News</option>
+                        <option value="local">Local</option>
+                        <option value="politics">Politics</option>
+                        <option value="business">Business</option>
+                        <option value="sports">Sports</option>
+                        <option value="technology">Technology</option>
+                        <option value="world">World</option>
+                        <option value="entertainment">Entertainment</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label>Position</label>
+                    <select id="position">
+                        <option value="hero">Hero</option>
+                        <option value="grid" selected>Grid</option>
+                        <option value="side">Side</option>
+                    </select>
+                </div>
+
+                <div class="full">
+                    <label>Title *</label>
+                    <input id="title" type="text" placeholder="පුවතේ මාතෘකාව">
+                </div>
+
+                <div class="full">
+                    <label>Description</label>
+                    <textarea id="desc" placeholder="පුවතේ විස්තරය"></textarea>
+                </div>
+
+                <div class="full">
+                    <label>Image URL</label>
+                    <input id="img" type="url" placeholder="https://...">
+                </div>
+
+                <div>
+                    <label>YouTube URL</label>
+                    <input id="youtube" type="url" placeholder="https://youtube.com/...">
+                </div>
+
+                <div>
+                    <label>Date</label>
+                    <input id="date" type="date">
+                </div>
+
+                <div>
+                    <label>Time</label>
+                    <input id="time" type="time">
+                </div>
+
+            </div>
+
+            <div class="btn-row">
+                <button class="btn btn-primary"
+                        onclick="saveArticle()">
+                    💾 Save Article
+                </button>
+
+                <button class="btn btn-secondary"
+                        onclick="resetArticleForm()">
+                    ✕ Clear
+                </button>
+            </div>
+
+        </div>
+
+        <div class="card">
+            <h2>📰 Published Articles</h2>
+            <div id="articleList" class="article-list"></div>
+        </div>
+
+    </section>
+
+    <section id="ticker" class="tab-content">
+
+        <div class="card">
+
+            <h2>📢 Breaking News Ticker</h2>
+
+            <div id="tickerList"></div>
+
+            <div class="btn-row">
+
+                <button class="btn btn-secondary"
+                        onclick="addTickerItem()">
+                    + Add Message
+                </button>
+
+                <button class="btn btn-primary"
+                        onclick="saveTicker()">
+                    💾 Save Ticker
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <section id="ads" class="tab-content">
+
+        <div class="card">
+
+            <h2>📣 Advertisement Slots</h2>
+
+            <div id="adsList" class="ads-grid"></div>
+
+            <div class="btn-row">
+
+                <button class="btn btn-primary"
+                        onclick="saveAds()">
+                    💾 Save Advertisements
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+<div class="loading" id="loading">
+    <div class="loader-box">
+        <div class="spinner"></div>
+        <div>Processing...</div>
+    </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+
+/* =========================================================
+   GOOGLE APPS SCRIPT API
+   ========================================================= */
+
+const API_URL =
+    "https://script.google.com/macros/s/AKfycbzh-zk0QPQTvGaByS5fKcJ7w6mUXpMXMDeynMEJ6MusC5RCNh0BVVQmNd2qRDeoutqaJg/exec";
+
+
+/* =========================================================
+   STATE
+   ========================================================= */
+
+let articles = [];
+let ticker = [];
+let ads = [];
+
+
+/* =========================================================
+   INIT
+   ========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+
+        setDefaultDateTime();
+        loadData();
+
+    }
+);
+
+
+/* =========================================================
+   TAB
+   ========================================================= */
+
+function openTab(tabId, button){
+
+    document
+        .querySelectorAll(".tab-content")
+        .forEach(el =>
+            el.classList.remove("active")
+        );
+
+    document
+        .querySelectorAll(".tab")
+        .forEach(el =>
+            el.classList.remove("active")
+        );
+
+    document
+        .getElementById(tabId)
+        .classList.add("active");
+
+    button.classList.add("active");
+}
+
+
+/* =========================================================
+   GET API
+   ========================================================= */
+
+async function apiGet(){
+
+    const response =
+        await fetch(
+            API_URL,
+            {
+                method:"GET",
+                cache:"no-store"
+            }
+        );
+
+    const text =
+        await response.text();
+
+    let data;
+
+    try{
+        data = JSON.parse(text);
+    }
+    catch(error){
+        throw new Error(
+            "Server එකෙන් JSON response එකක් ලැබුණේ නැහැ."
+        );
+    }
+
+    if(!data.success){
+        throw new Error(
+            data.error || "GET request failed"
+        );
+    }
+
+    return data;
+}
+
+
+/* =========================================================
+   POST API
+   ========================================================= */
+
+async function apiPost(payload){
+
+    const response =
+        await fetch(
+            API_URL,
+            {
+                method:"POST",
+                headers:{
+                    "Content-Type":
+                        "text/plain;charset=utf-8"
+                },
+                body:JSON.stringify(payload)
+            }
+        );
+
+    const text =
+        await response.text();
+
+    let data;
+
+    try{
+        data = JSON.parse(text);
+    }
+    catch(error){
+        throw new Error(
+            "Server response JSON නොවේ."
+        );
+    }
+
+    if(!data.success){
+        throw new Error(
+            data.error || "POST request failed"
+        );
+    }
+
+    return data;
+}
+
+
+/* =========================================================
+   LOAD DATA
+   ========================================================= */
+
+async function loadData(){
+
+    showLoading(true);
+
+    try{
+
+        const data =
+            await apiGet();
+
+        articles =
+            Array.isArray(data.articles)
+                ? data.articles
+                : [];
+
+        ticker =
+            Array.isArray(data.ticker)
+                ? data.ticker
+                : [];
+
+        ads =
+            Array.isArray(data.ads)
+                ? data.ads
+                : [];
+
+        renderArticles();
+        renderTicker();
+        renderAds();
+        updateStats();
+
+        showToast(
+            "✅ Data loaded successfully."
+        );
+
+    }
+    catch(error){
+
+        console.error(error);
+
+        showToast(
+            "❌ " + error.message
+        );
+
+    }
+    finally{
+
+        showLoading(false);
+
+    }
+}
+
+
+/* =========================================================
+   SAVE ARTICLE
+   ========================================================= */
+
+async function saveArticle(){
+
+    const title =
+        document
+            .getElementById("title")
+            .value
+            .trim();
+
+    if(!title){
+        showToast(
+            "⚠️ Title එක අනිවාර්යයි."
+        );
+        return;
+    }
+
+    const article = {
+
+        id:
+            document
+                .getElementById("articleId")
+                .value
+                .trim(),
+
+        category:
+            document
+                .getElementById("category")
+                .value,
+
+        position:
+            document
+                .getElementById("position")
+                .value,
+
+        title:title,
+
+        desc:
+            document
+                .getElementById("desc")
+                .value
+                .trim(),
+
+        img:
+            document
+                .getElementById("img")
+                .value
+                .trim(),
+
+        youtube:
+            document
+                .getElementById("youtube")
+                .value
+                .trim(),
+
+        date:
+            document
+                .getElementById("date")
+                .value,
+
+        time:
+            document
+                .getElementById("time")
+                .value
+    };
+
+    showLoading(true);
+
+    try{
+
+        await apiPost({
+            action:"saveArticle",
+            article:article
+        });
+
+        showToast(
+            "✅ Article saved successfully."
+        );
+
+        resetArticleForm();
+
+        await loadData();
+
+    }
+    catch(error){
+
+        console.error(error);
+
+        showToast(
+            "❌ " + error.message
+        );
+
+    }
+    finally{
+
+        showLoading(false);
+
+    }
+}
+
+
+/* =========================================================
+   EDIT ARTICLE
+   ========================================================= */
+
+function editArticle(id){
+
+    const article =
+        articles.find(
+            item =>
+                String(item.id) ===
+                String(id)
+        );
+
+    if(!article){
+
+        showToast(
+            "Article එක හමු වුණේ නැහැ."
+        );
+
+        return;
+    }
+
+    document.getElementById("articleId").value =
+        article.id || "";
+
+    document.getElementById("category").value =
+        article.category || "breaking";
+
+    document.getElementById("position").value =
+        article.position || "grid";
+
+    document.getElementById("title").value =
+        article.title || "";
+
+    document.getElementById("desc").value =
+        article.desc || "";
+
+    document.getElementById("img").value =
+        article.img || "";
+
+    document.getElementById("youtube").value =
+        article.youtube || "";
+
+    document.getElementById("date").value =
+        normalizeDate(article.date);
+
+    document.getElementById("time").value =
+        normalizeTime(article.time);
+
+    document.getElementById("articleFormTitle").textContent =
+        "✏️ පුවත සංස්කරණය කරන්න";
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+}
+
+
+/* =========================================================
+   DELETE ARTICLE
+   ========================================================= */
+
+async function deleteArticle(id){
+
+    if(!confirm("මේ පුවත delete කරන්නද?")){
+        return;
+    }
+
+    showLoading(true);
+
+    try{
+
+        await apiPost({
+            action:"deleteArticle",
+            id:id
+        });
+
+        showToast(
+            "✅ Article deleted."
+        );
+
+        await loadData();
+
+    }
+    catch(error){
+
+        showToast(
+            "❌ " + error.message
+        );
+
+    }
+    finally{
+
+        showLoading(false);
+
+    }
+}
+
+
+/* =========================================================
+   RESET ARTICLE
+   ========================================================= */
+
+function resetArticleForm(){
+
+    document.getElementById("articleId").value = "";
+
+    document.getElementById("category").value =
+        "breaking";
+
+    document.getElementById("position").value =
+        "grid";
+
+    document.getElementById("title").value = "";
+
+    document.getElementById("desc").value = "";
+
+    document.getElementById("img").value = "";
+
+    document.getElementById("youtube").value = "";
+
+    setDefaultDateTime();
+
+    document.getElementById("articleFormTitle").textContent =
+        "📝 නව පුවතක් එක් කරන්න";
+}
+
+
+/* =========================================================
+   RENDER ARTICLES
+   ========================================================= */
+
+function renderArticles(){
+
+    const container =
+        document.getElementById("articleList");
+
+    if(!articles.length){
+
+        container.innerHTML =
+            `<div class="empty">
+                📰 තවමත් Articles නැහැ.
+            </div>`;
+
+        return;
+    }
+
+    const sorted =
+        [...articles].sort(
+            (a,b) =>
+                new Date(b.updatedAt || 0) -
+                new Date(a.updatedAt || 0)
+        );
+
+    container.innerHTML =
+        sorted
+        .map(article => {
+
+            const image =
+                article.img &&
+                article.img.trim()
+                    ? escapeHtml(article.img)
+                    : "";
+
+            const title =
+                escapeHtml(article.title || "");
+
+            const desc =
+                escapeHtml(article.desc || "");
+
+            const category =
+                escapeHtml(article.category || "");
+
+            const date =
+                escapeHtml(article.date || "");
+
+            const time =
+                escapeHtml(article.time || "");
+
+            return `
+
+                <div class="article-card">
+
+                    ${
+                        image
+                        ?
+                        `<img
+                            class="article-image"
+                            src="${image}"
+                            alt=""
+                            onerror="this.style.display='none'
+                        >`
+                        :
+                        `<div
+                            class="article-image"
+                            style="
+                                display:flex;
+                                align-items:center;
+                                justify-content:center;
+                                color:#999;
+                            "
+                        >
+                            No Image
+                        </div>`
+                    }
+
+                    <div class="article-body">
+
+                        <span class="article-category">
+                            ${category}
+                        </span>
+
+                        <div class="article-title">
+                            ${title}
+                        </div>
+
+                        <div class="article-desc">
+                            ${desc}
+                        </div>
+
+                        <div class="meta">
+                            ${date}
+                            ${time ? " • " + time : ""}
+                        </div>
+
+                        <div class="actions">
+
+                            <button
+                                class="btn btn-secondary"
+                                onclick="editArticle('${escapeJs(article.id)}')"
+                            >
+                                ✏️ Edit
+                            </button>
+
+                            <button
+                                class="btn btn-danger"
+                                onclick="deleteArticle('${escapeJs(article.id)}')"
+                            >
+                                🗑 Delete
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            `;
+
+        })
+        .join("");
+}
+
+
+/* =========================================================
+   TICKER
+   ========================================================= */
+
+function renderTicker(){
+
+    const container =
+        document.getElementById("tickerList");
+
+    if(!ticker.length){
+        ticker = [""];
+    }
+
+    container.innerHTML =
+        ticker.map(
+            text => `
+
+                <div class="ticker-item">
+
+                    <input
+                        type="text"
+                        class="ticker-input"
+                        value="${escapeAttr(text)}"
+                        placeholder="Ticker message..."
+                    >
+
+                    <button
+                        class="ticker-remove"
+                        onclick="removeTickerItem(this)"
+                    >
+                        ✕
+                    </button>
+
+                </div>
+            `
+        ).join("");
+}
+
+
+function addTickerItem(){
+
+    const container =
+        document.getElementById("tickerList");
+
+    const div =
+        document.createElement("div");
+
+    div.className =
+        "ticker-item";
+
+    div.innerHTML = `
+
+        <input
+            type="text"
+            class="ticker-input"
+            placeholder="Ticker message..."
+        >
+
+        <button
+            class="ticker-remove"
+            onclick="removeTickerItem(this)"
+        >
+            ✕
+        </button>
+    `;
+
+    container.appendChild(div);
+}
+
+
+function removeTickerItem(button){
+
+    button.parentElement.remove();
+}
+
+
+async function saveTicker(){
+
+    const inputs =
+        document.querySelectorAll(
+            ".ticker-input"
+        );
+
+    const values =
+        Array.from(inputs)
+            .map(
+                input =>
+                    input.value.trim()
+            )
+            .filter(Boolean);
+
+    showLoading(true);
+
+    try{
+
+        await apiPost({
+            action:"saveTicker",
+            ticker:values
+        });
+
+        showToast(
+            "✅ Ticker saved."
+        );
+
+        await loadData();
+
+    }
+    catch(error){
+
+        showToast(
+            "❌ " + error.message
+        );
+
+    }
+    finally{
+
+        showLoading(false);
+
+    }
+}
+
+
+/* =========================================================
+   ADS
+   ========================================================= */
+
+function renderAds(){
+
+    let data =
+        [...ads];
+
+    while(data.length < 4){
+
+        data.push({
+            id:data.length + 1,
+            title:"",
+            subtitle:"",
+            img:"",
+            link:"#"
+        });
+    }
+
+    data = data.slice(0,4);
+
+    const container =
+        document.getElementById("adsList");
+
+    container.innerHTML =
+        data.map(
+            (ad,index) => `
+
+                <div class="ad-box">
+
+                    <h3>
+                        Ad Slot ${index + 1}
+                    </h3>
+
+                    <input
+                        type="hidden"
+                        class="ad-id"
+                        value="${escapeAttr(ad.id ?? index + 1)}"
+                    >
+
+                    <label>Title</label>
+
+                    <input
+                        class="ad-title"
+                        value="${escapeAttr(ad.title || "")}"
+                        placeholder="Advertisement title"
+                    >
+
+                    <br>
+
+                    <label>Subtitle</label>
+
+                    <input
+                        class="ad-subtitle"
+                        value="${escapeAttr(ad.subtitle || "")}"
+                        placeholder="Advertisement subtitle"
+                    >
+
+                    <br>
+
+                    <label>Image URL</label>
+
+                    <input
+                        class="ad-img"
+                        value="${escapeAttr(ad.img || "")}"
+                        placeholder="https://..."
+                        oninput="updateAdPreview(this)"
+                    >
+
+                    <img
+                        class="ad-preview"
+                        src="${escapeAttr(ad.img || "")}"
+                        onerror="this.style.display='none'"
+                        ${ad.img ? "" : 'style="display:none"'}
+                    >
+
+                    <br>
+
+                    <label>Link</label>
+
+                    <input
+                        class="ad-link"
+                        value="${escapeAttr(ad.link || "#")}"
+                        placeholder="https://..."
+                    >
+
+                </div>
+            `
+        ).join("");
+}
+
+
+function updateAdPreview(input){
+
+    const image =
+        input.parentElement.querySelector(
+            ".ad-preview"
+        );
+
+    const url =
+        input.value.trim();
+
+    if(!url){
+
+        image.style.display =
+            "none";
+
+        image.removeAttribute("src");
+
+        return;
+    }
+
+    image.src = url;
+    image.style.display = "block";
+}
+
+
+async function saveAds(){
+
+    const boxes =
+        document.querySelectorAll(".ad-box");
+
+    const result =
+        Array.from(boxes)
+            .map(
+                (box,index) => ({
+
+                    id:
+                        box.querySelector(
+                            ".ad-id"
+                        ).value ||
+                        index + 1,
+
+                    title:
+                        box.querySelector(
+                            ".ad-title"
+                        ).value.trim(),
+
+                    subtitle:
+                        box.querySelector(
+                            ".ad-subtitle"
+                        ).value.trim(),
+
+                    img:
+                        box.querySelector(
+                            ".ad-img"
+                        ).value.trim(),
+
+                    link:
+                        box.querySelector(
+                            ".ad-link"
+                        ).value.trim() ||
+                        "#"
+                })
+            );
+
+    showLoading(true);
+
+    try{
+
+        await apiPost({
+            action:"saveAds",
+            ads:result
+        });
+
+        showToast(
+            "✅ Ads saved."
+        );
+
+        await loadData();
+
+    }
+    catch(error){
+
+        showToast(
+            "❌ " + error.message
+        );
+
+    }
+    finally{
+
+        showLoading(false);
+
+    }
+}
+
+
+/* =========================================================
+   STATS
+   ========================================================= */
+
+function updateStats(){
+
+    document.getElementById("articleCount").textContent =
+        articles.length;
+
+    document.getElementById("tickerCount").textContent =
+        ticker.filter(Boolean).length;
+
+    document.getElementById("adsCount").textContent =
+        ads.length;
+}
+
+
+/* =========================================================
+   DATE / TIME
+   ========================================================= */
+
+function setDefaultDateTime(){
+
+    const now = new Date();
+
+    document.getElementById("date").value =
+        now.toISOString().split("T")[0];
+
+    document.getElementById("time").value =
+        now.toTimeString().slice(0,5);
+}
+
+
+function normalizeDate(value){
+
+    if(!value) return "";
+
+    const date = new Date(value);
+
+    if(!isNaN(date.getTime())){
+
+        return date
+            .toISOString()
+            .split("T")[0];
+    }
+
+    return String(value).slice(0,10);
+}
+
+
+function normalizeTime(value){
+
+    if(!value) return "";
+
+    const match =
+        String(value).match(
+            /(\d{1,2}):(\d{2})/
+        );
+
+    if(!match) return "";
+
+    return String(
+        Number(match[1])
+    ).padStart(2,"0") +
+    ":" +
+    match[2];
+}
+
+
+/* =========================================================
+   UI
+   ========================================================= */
+
+function showLoading(show){
+
+    document
+        .getElementById("loading")
+        .classList.toggle(
+            "show",
+            show
+        );
+}
+
+
+function showToast(message){
+
+    const toast =
+        document.getElementById("toast");
+
+    toast.textContent =
+        message;
+
+    toast.classList.add("show");
+
+    clearTimeout(
+        window.__toastTimer
+    );
+
+    window.__toastTimer =
+        setTimeout(
+            () => {
+                toast.classList.remove("show");
+            },
+            3500
+        );
+}
+
+
+/* =========================================================
+   ESCAPE HELPERS
+   ========================================================= */
+
+function escapeHtml(value){
+
+    return String(value ?? "")
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+}
+
+
+function escapeAttr(value){
+
+    return escapeHtml(value);
+}
+
+
+function escapeJs(value){
+
+    return String(value ?? "")
+        .replace(/\\/g,"\\\\")
+        .replace(/'/g,"\\'")
+        .replace(/"/g,'\\"')
+        .replace(/\n/g,"\\n")
+        .replace(/\r/g,"\\r");
+}
+
+</script>
+
+</body>
+</html>
