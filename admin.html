@@ -3,1129 +3,725 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NewsPlusLK — Admin Panel</title>
+<title>News+LK — පරිපාලක පැනලය (Admin Panel)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;600;700;800&family=Noto+Sans+Sinhala:wght@400;500;600;700&family=Yaldevi:wght@400;500;600&display=swap" rel="stylesheet">
 
 <style>
-* {
+  :root {
+    --brand-navy: #0f172a;
+    --brand-red: #d71920;
+    --brand-red-hover: #b91c1c;
+    --paper: #f8fafc;
+    --paper-card: #ffffff;
+    --ink: #1e293b;
+    --ink-soft: #64748b;
+    --line: #e2e8f0;
+    --green: #15803d;
+  }
+
+  * {
     box-sizing: border-box;
+  }
+
+  body {
     margin: 0;
-    padding: 0;
-}
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Noto Sans Sinhala', 'Yaldevi', sans-serif;
+  }
 
-body {
-    font-family: Arial, Helvetica, sans-serif;
-    background: #f3f5f8;
-    color: #1f2937;
-}
+  h1, h2, h3 {
+    font-family: 'Abhaya Libre', serif;
+    color: var(--ink);
+  }
 
-button, input, textarea, select {
-    font: inherit;
-}
+  a {
+    color: inherit;
+  }
 
-button {
-    cursor: pointer;
-}
+  button {
+    font-family: inherit;
+  }
 
-.topbar {
-    background: #d71920;
-    color: #fff;
-    padding: 16px 20px;
+  /* Top Header with Logo */
+  header.top {
+    background: var(--brand-navy);
+    color: #ffffff;
+    padding: 12px 24px;
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    box-shadow: 0 3px 15px rgba(0,0,0,.15);
-}
-
-.logo {
-    font-size: 22px;
-    font-weight: 800;
-}
-
-.logo span {
-    display: block;
-    font-size: 12px;
-    font-weight: 500;
-    opacity: .85;
-    margin-top: 3px;
-}
-
-.container {
-    max-width: 1400px;
-    margin: auto;
-    padding: 20px;
-}
-
-.tabs {
-    display: flex;
-    gap: 8px;
-    background: #fff;
-    padding: 8px;
-    border-radius: 14px;
-    box-shadow: 0 2px 10px rgba(0,0,0,.05);
-    margin-bottom: 20px;
-    overflow-x: auto;
-}
-
-.tab {
-    border: 0;
-    background: #f1f3f6;
-    padding: 11px 18px;
-    border-radius: 10px;
-    white-space: nowrap;
-    font-weight: 700;
-    color: #374151;
-}
-
-.tab.active {
-    background: #d71920;
-    color: #fff;
-}
-
-.tab-content {
-    display: none;
-}
-
-.tab-content.active {
-    display: block;
-}
-
-.card {
-    background: #fff;
-    border-radius: 16px;
-    padding: 20px;
-    box-shadow: 0 3px 15px rgba(0,0,0,.06);
-    margin-bottom: 20px;
-}
-
-.card h2 {
-    font-size: 20px;
-    margin-bottom: 16px;
-}
-
-.grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
-}
-
-.full {
-    grid-column: 1 / -1;
-}
-
-label {
-    display: block;
-    font-size: 14px;
-    font-weight: 700;
-    margin-bottom: 7px;
-}
-
-input,
-textarea,
-select {
-    width: 100%;
-    border: 1px solid #d5dae0;
-    border-radius: 10px;
-    padding: 12px;
-    background: #fff;
-    outline: none;
-    transition: .2s;
-}
-
-input:focus,
-textarea:focus,
-select:focus {
-    border-color: #d71920;
-    box-shadow: 0 0 0 3px rgba(215,25,32,.08);
-}
-
-textarea {
-    min-height: 120px;
-    resize: vertical;
-}
-
-.btn-row {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-    margin-top: 16px;
-}
-
-.btn {
-    border: 0;
-    border-radius: 10px;
-    padding: 11px 16px;
-    font-weight: 700;
-}
-
-.btn-primary {
-    background: #d71920;
-    color: #fff;
-}
-
-.btn-secondary {
-    background: #eef1f5;
-    color: #111827;
-}
-
-.btn-danger {
-    background: #b91c1c;
-    color: #fff;
-}
-
-.article-list {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 15px;
-}
-
-.article-card {
-    border: 1px solid #e5e7eb;
-    border-radius: 14px;
-    overflow: hidden;
-    background: #fff;
-}
-
-.article-image {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-    background: #eee;
-}
-
-.article-body {
-    padding: 14px;
-}
-
-.article-category {
-    display: inline-block;
-    background: #d71920;
-    color: #fff;
-    padding: 5px 9px;
-    border-radius: 999px;
-    font-size: 11px;
-    font-weight: 700;
-    margin-bottom: 8px;
-}
-
-.article-title {
-    font-size: 17px;
-    font-weight: 800;
-    line-height: 1.35;
-    margin-bottom: 8px;
-}
-
-.article-desc {
-    font-size: 13px;
-    color: #6b7280;
-    line-height: 1.5;
-}
-
-.meta {
-    font-size: 11px;
-    color: #9ca3af;
-    margin-top: 8px;
-}
-
-.actions {
-    display: flex;
-    gap: 8px;
-    margin-top: 12px;
-}
-
-.actions button {
-    flex: 1;
-}
-
-.ticker-item {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 10px;
-}
-
-.ticker-item input {
-    flex: 1;
-}
-
-.ticker-remove {
-    width: 44px;
-    border: 0;
-    border-radius: 10px;
-    background: #fee2e2;
-    color: #b91c1c;
-    font-weight: 800;
-}
-
-.ads-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
-}
-
-.ad-box {
-    border: 1px solid #e5e7eb;
-    border-radius: 14px;
-    padding: 16px;
-}
-
-.ad-box h3 {
-    margin-bottom: 12px;
-    color: #d71920;
-}
-
-.ad-preview {
-    width: 100%;
-    height: 180px;
-    border-radius: 10px;
-    object-fit: cover;
-    background: #f1f1f1;
-    margin-top: 10px;
-}
-
-.stats {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 15px;
-    margin-bottom: 20px;
-}
-
-.stat {
-    background: #fff;
-    padding: 20px;
-    border-radius: 16px;
-    box-shadow: 0 3px 15px rgba(0,0,0,.05);
-}
-
-.stat small {
-    color: #6b7280;
-}
-
-.stat strong {
-    display: block;
-    font-size: 30px;
-    margin-top: 5px;
-}
-
-.loading {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,.45);
-    display: none;
     align-items: center;
-    justify-content: center;
-    z-index: 999;
-}
+    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+  }
 
-.loading.show {
+  .brand-container {
     display: flex;
-}
+    align-items: center;
+    gap: 12px;
+  }
 
-.loader-box {
-    background: #fff;
-    border-radius: 15px;
-    padding: 25px 35px;
+  .brand-logo {
+    height: 42px;
+    width: auto;
+    object-fit: contain;
+    background: #ffffff;
+    padding: 4px 8px;
+    border-radius: 4px;
+  }
+
+  .brand-text {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .brand-text h1 {
+    color: #ffffff;
+    font-size: 20px;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+  }
+
+  .brand-text h1 span.red {
+    color: var(--brand-red);
+  }
+
+  .brand-text span.sub {
+    font-size: 11px;
+    color: #94a3b8;
+    font-family: 'Noto Sans Sinhala', sans-serif;
+  }
+
+  header.top a.site-link {
+    font-size: 13px;
+    color: #f8fafc;
+    text-decoration: none;
+    background: rgba(255,255,255,0.1);
+    padding: 6px 12px;
+    border-radius: 4px;
+    transition: background 0.2s;
+  }
+
+  header.top a.site-link:hover {
+    background: rgba(255,255,255,0.2);
+  }
+
+  .wrap {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 30px 20px 60px;
+  }
+
+  /* Login Panel */
+  .login-box {
+    max-width: 360px;
+    margin: 60px auto;
     text-align: center;
-}
+    background: var(--paper-card);
+    padding: 32px 28px;
+    border-radius: 8px;
+    box-shadow: 0 10px 25px -5px rgba(0,0,0,0.08);
+    border: 1px solid var(--line);
+  }
 
-.spinner {
-    width: 35px;
-    height: 35px;
-    border: 4px solid #ddd;
-    border-top-color: #d71920;
-    border-radius: 50%;
-    animation: spin .8s linear infinite;
-    margin: auto auto 12px;
-}
+  .login-box img {
+    height: 50px;
+    margin-bottom: 16px;
+  }
 
-@keyframes spin {
-    to { transform: rotate(360deg); }
-}
+  .login-box p {
+    color: var(--ink-soft);
+    font-size: 13.5px;
+    margin-bottom: 18px;
+  }
 
-.toast {
-    position: fixed;
-    right: 20px;
-    bottom: 20px;
-    background: #111827;
+  .login-box input {
+    width: 100%;
+    padding: 11px 14px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    font-size: 14px;
+    margin-bottom: 12px;
+    font-family: 'Noto Sans Sinhala', sans-serif;
+  }
+
+  .login-box button, .btn {
+    width: 100%;
+    padding: 11px;
+    background: var(--brand-red);
     color: #fff;
-    padding: 14px 18px;
-    border-radius: 10px;
-    display: none;
-    z-index: 1000;
-    max-width: 350px;
-}
+    border: none;
+    border-radius: 6px;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.2s;
+  }
 
-.toast.show {
+  .login-box button:hover, .btn:hover {
+    background: var(--brand-red-hover);
+  }
+
+  .login-error {
+    color: var(--brand-red);
+    font-size: 12.5px;
+    margin-top: 8px;
+    min-height: 16px;
+  }
+
+  /* Admin Dashboard UI */
+  .admin-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 22px;
+    border-bottom: 2px solid var(--line);
+  }
+
+  .admin-tabs button {
+    background: none;
+    border: none;
+    padding: 12px 18px;
+    font-weight: 600;
+    font-size: 14.5px;
+    color: var(--ink-soft);
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+  }
+
+  .admin-tabs button.active {
+    color: var(--brand-red);
+    border-bottom-color: var(--brand-red);
+  }
+
+  .panel {
+    background: var(--paper-card);
+    border-radius: 8px;
+    padding: 24px;
+    border: 1px solid var(--line);
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.03);
+  }
+
+  .field {
+    margin-bottom: 16px;
+  }
+
+  .field label {
     display: block;
-}
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
 
-.empty {
-    text-align: center;
-    padding: 40px 20px;
-    color: #6b7280;
-}
+  .field input, .field select, .field textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    font-size: 14px;
+    font-family: 'Noto Sans Sinhala', sans-serif;
+    background: #fafafa;
+  }
 
-@media(max-width:900px){
-    .article-list { grid-template-columns: repeat(2, 1fr); }
-    .grid { grid-template-columns: 1fr; }
-    .full { grid-column: auto; }
-    .ads-grid { grid-template-columns: 1fr; }
-    .stats { grid-template-columns: 1fr; }
-}
+  .field input:focus, .field select:focus, .field textarea:focus {
+    outline: none;
+    border-color: var(--brand-red);
+    background: #fff;
+  }
 
-@media(max-width:600px){
-    .container { padding: 12px; }
-    .article-list { grid-template-columns: 1fr; }
-    .topbar { padding: 14px; }
-    .logo { font-size: 18px; }
-    .card { padding: 15px; }
-}
+  .field textarea {
+    resize: vertical;
+    min-height: 75px;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .save-msg {
+    font-size: 13px;
+    color: var(--green);
+    font-weight: 600;
+    margin-top: 10px;
+    min-height: 18px;
+  }
+
+  .btn.wide {
+    width: auto;
+    padding: 10px 24px;
+  }
+
+  .art-row {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .art-row:last-child {
+    border-bottom: none;
+  }
+
+  .art-row .thumb {
+    width: 65px;
+    height: 48px;
+    flex-shrink: 0;
+    border-radius: 4px;
+    background: #e2e8f0;
+    object-fit: cover;
+  }
+
+  .art-row .meta {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .art-row .meta .pos-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--brand-red);
+    background: #fef2f2;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-bottom: 4px;
+    margin-right: 4px;
+  }
+
+  .art-row .meta .cat-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--brand-navy);
+    background: #f1f5f9;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-bottom: 4px;
+  }
+
+  .art-row .meta h4 {
+    font-size: 14.5px;
+    margin: 0;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .art-row .acts {
+    display: flex;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .art-row .acts button {
+    background: #f8fafc;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 6px 12px;
+    font-size: 12.5px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .art-row .acts button:hover {
+    border-color: var(--brand-navy);
+    color: var(--brand-navy);
+  }
+
+  .art-row .acts button.del:hover {
+    border-color: var(--brand-red);
+    color: var(--brand-red);
+    background: #fef2f2;
+  }
+
+  .empty-note {
+    color: var(--ink-soft);
+    font-size: 13.5px;
+    font-style: italic;
+    padding: 10px 0;
+  }
+
+  .ticker-editor .t-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+
+  .ticker-editor .t-row input {
+    flex: 1;
+    padding: 10px 12px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    font-size: 14px;
+    font-family: 'Noto Sans Sinhala', sans-serif;
+  }
+
+  .ticker-editor .t-row button {
+    background: #fef2f2;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 0 14px;
+    cursor: pointer;
+    color: var(--brand-red);
+    font-weight: bold;
+  }
+
+  @media (max-width: 600px) {
+    .form-row {
+      grid-template-columns: 1fr;
+    }
+  }
 </style>
 </head>
-
 <body>
 
-<header class="topbar">
-    <div class="logo">
-        NewsPlusLK
-        <span>Administration Panel</span>
+  <!-- HEADER -->
+  <header class="top">
+    <div class="brand-container">
+      <!-- Logo Image -->
+      <img src="logo.jpeg" alt="News+LK Logo" class="brand-logo" onerror="this.style.display='none'">
+      <div class="brand-text">
+        <h1>News<span class="red">+LK</span></h1>
+        <span class="sub">පරිපාලක පැනලය (Admin Panel)</span>
+      </div>
+    </div>
+    <a href="index.html" class="site-link">← වෙබ් අඩවියට යන්න</a>
+  </header>
+
+  <div class="wrap">
+
+    <!-- LOGIN VIEW -->
+    <div id="loginView" class="login-box">
+      <img src="logo.jpeg" alt="News+LK" onerror="this.style.display='none'">
+      <p>ඉදිරියට යාමට රහස්පදය ඇතුළත් කරන්න.</p>
+      <input type="password" id="pwInput" placeholder="රහස්පදය" onkeydown="if(event.key==='Enter')tryLogin()">
+      <button onclick="tryLogin()">ඇතුල් වන්න</button>
+      <div class="login-error" id="loginErr"></div>
     </div>
 
-    <button class="btn btn-secondary" onclick="loadData()">
-        🔄 Refresh
-    </button>
-</header>
+    <!-- DASHBOARD VIEW -->
+    <div id="dashView" style="display:none;">
+      
+      <div id="sheetWarning" style="display:none;background:#fffbeb;border:1px solid #f59e0b;color:#92400e;padding:12px 16px;border-radius:6px;font-size:13px;margin-bottom:20px;">
+        ⚠ Google Sheet එකට connect වී නැත — දැනට දත්ත save වෙන්නේ මෙම browser එකේ පමණි. `SCRIPT_URL` එක admin.html හි නිවැරදිව set කරන්න.
+      </div>
 
-<main class="container">
+      <!-- TABS -->
+      <div class="admin-tabs">
+        <button class="active" data-tab="articles" onclick="switchTab('articles')">පුවත් කළමනාකරණය</button>
+        <button data-tab="ticker" onclick="switchTab('ticker')">නවතම පට්ටිය (Ticker)</button>
+      </div>
 
-    <div class="stats">
-        <div class="stat">
-            <small>ලිපි සංඛ්‍යාව</small>
-            <strong id="articleCount">0</strong>
+      <!-- TAB 1: ARTICLES MANAGEMENT -->
+      <div id="tab-articles">
+        <div class="panel">
+          <h3 style="font-size:17px;margin:0 0 16px;">නව පුවතක් එකතු කරන්න / සංස්කරණය කරන්න</h3>
+          
+          <div class="form-row">
+            <div class="field">
+              <label>කාණ්ඩය (Category)</label>
+              <select id="f-category"></select>
+            </div>
+            <div class="field">
+              <label>මුල් පිටුවේ පෙනුම (Position)</label>
+              <select id="f-position">
+                <option value="hero">ප්‍රධාන පුවත (Hero)</option>
+                <option value="side">පැති පුවත (Side)</option>
+                <option value="grid" selected>සාරාංශ කාණ්ඩ (Grid)</option>
+                <option value="none">මුල් පිටුවේ නොපෙන්වන්න</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>ශීර්ෂ පාඨය (Title)</label>
+            <input id="f-title" placeholder="පුවත් ශීර්ෂය ඇතුළත් කරන්න">
+          </div>
+
+          <div class="field">
+            <label>විස්තරය (Description)</label>
+            <textarea id="f-desc" placeholder="පුවතේ කෙටි විස්තරය..."></textarea>
+          </div>
+
+          <div class="field">
+            <label>රූප URL (Image Link - විකල්ප)</label>
+            <input id="f-img" placeholder="https://example.com/image.jpg">
+          </div>
+
+          <input type="hidden" id="f-id">
+          
+          <button class="btn wide" onclick="saveArticle()">සුරකින්න (Save)</button>
+          <div class="save-msg" id="artMsg"></div>
         </div>
 
-        <div class="stat">
-            <small>Ticker Messages</small>
-            <strong id="tickerCount">0</strong>
+        <h3 style="font-size:17px;margin:28px 0 14px;">දැනට පළකර ඇති පුවත්</h3>
+        <div class="panel" id="articleListPanel">
+          <div id="articleList"></div>
         </div>
+      </div>
 
-        <div class="stat">
-            <small>Ads</small>
-            <strong id="adsCount">0</strong>
+      <!-- TAB 2: TICKER MANAGEMENT -->
+      <div id="tab-ticker" style="display:none;">
+        <div class="panel">
+          <h3 style="font-size:17px;margin:0 0 14px;">නවතම පට්ටියේ පෙළ (Breaking News Ticker)</h3>
+          <div class="ticker-editor" id="tickerEditor"></div>
+          <br>
+          <button class="btn wide" style="background:#475569;" onclick="addTickerRow('')">+ පේළියක් එකතු කරන්න</button>
+          <br><br>
+          <button class="btn wide" onclick="saveTicker()">සුරකින්න (Save Ticker)</button>
+          <div class="save-msg" id="tickerMsg"></div>
         </div>
+      </div>
+
     </div>
 
-    <div class="tabs">
-        <button class="tab active" onclick="openTab('articles', this)">
-            📰 Articles
-        </button>
-
-        <button class="tab" onclick="openTab('ticker', this)">
-            📢 Ticker
-        </button>
-
-        <button class="tab" onclick="openTab('ads', this)">
-            📣 Ads
-        </button>
-    </div>
-
-    <section id="articles" class="tab-content active">
-        <div class="card">
-            <h2 id="articleFormTitle">
-                📝 නව පුවතක් එක් කරන්න
-            </h2>
-
-            <input type="hidden" id="articleId">
-
-            <div class="grid">
-                <div>
-                    <label>Category</label>
-                    <select id="category">
-                        <option value="breaking">Breaking News</option>
-                        <option value="local">Local</option>
-                        <option value="politics">Politics</option>
-                        <option value="business">Business</option>
-                        <option value="sports">Sports</option>
-                        <option value="technology">Technology</option>
-                        <option value="world">World</option>
-                        <option value="entertainment">Entertainment</option>
-                    </select>
-                </div>
-
-                <div>
-                    <label>Position</label>
-                    <select id="position">
-                        <option value="hero">Hero</option>
-                        <option value="grid" selected>Grid</option>
-                        <option value="side">Side</option>
-                    </select>
-                </div>
-
-                <div class="full">
-                    <label>Title *</label>
-                    <input id="title" type="text" placeholder="පුවතේ මාතෘකාව">
-                </div>
-
-                <div class="full">
-                    <label>Description</label>
-                    <textarea id="desc" placeholder="පුවතේ විස්තරය"></textarea>
-                </div>
-
-                <div class="full">
-                    <label>Image URL</label>
-                    <input id="img" type="url" placeholder="https://...">
-                </div>
-
-                <div>
-                    <label>YouTube URL</label>
-                    <input id="youtube" type="url" placeholder="https://youtube.com/...">
-                </div>
-
-                <div>
-                    <label>Date</label>
-                    <input id="date" type="date">
-                </div>
-
-                <div>
-                    <label>Time</label>
-                    <input id="time" type="time">
-                </div>
-            </div>
-
-            <div class="btn-row">
-                <button class="btn btn-primary" onclick="saveArticle()">
-                    💾 Save Article
-                </button>
-
-                <button class="btn btn-secondary" onclick="resetArticleForm()">
-                    ✕ Clear
-                </button>
-            </div>
-        </div>
-
-        <div class="card">
-            <h2>📰 Published Articles</h2>
-            <div id="articleList" class="article-list"></div>
-        </div>
-    </section>
-
-    <section id="ticker" class="tab-content">
-        <div class="card">
-            <h2>📢 Breaking News Ticker</h2>
-            <div id="tickerList"></div>
-            <div class="btn-row">
-                <button class="btn btn-secondary" onclick="addTickerItem()">
-                    + Add Message
-                </button>
-                <button class="btn btn-primary" onclick="saveTicker()">
-                    💾 Save Ticker
-                </button>
-            </div>
-        </div>
-    </section>
-
-    <section id="ads" class="tab-content">
-        <div class="card">
-            <h2>📣 Advertisement Slots</h2>
-            <div id="adsList" class="ads-grid"></div>
-            <div class="btn-row">
-                <button class="btn btn-primary" onclick="saveAds()">
-                    💾 Save Advertisements
-                </button>
-            </div>
-        </div>
-    </section>
-
-</main>
-
-<div class="loading" id="loading">
-    <div class="loader-box">
-        <div class="spinner"></div>
-        <div>Processing...</div>
-    </div>
-</div>
-
-<div class="toast" id="toast"></div>
+  </div>
 
 <script>
-/* =========================================================
-   GOOGLE APPS SCRIPT API
-   ========================================================= */
+const ADMIN_PASSWORD = "Plus@2026"; // Admin මුරපදය
 
-const API_URL = "https://script.google.com/macros/s/AKfycbzh-zk0QPQTvGaByS5fKcJ7w6mUXpMXMDeynMEJ6MusC5RCNh0BVVQmNd2qRDeoutqaJg/exec";
+// Google Apps Script Web App URL එක:
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzh-zk0QPQTvGaByS5fKcJ7w6mUXpMXMDeynMEJ6MusC5RCNh0BVVQmNd2qRDeoutqaJg/exec";
 
+const STORAGE_KEY = "site-data";
+const CATEGORIES = ['ප්‍රධාන පුවත්','දේශපාලනය','ක්‍රීඩා','ව්‍යාපාර','ලෝකය','විනෝදාංශය','තාක්ෂණය','ජීවන රටාව'];
 
-/* =========================================================
-   STATE
-   ========================================================= */
+const DEFAULT_DATA = { ticker: [], articles: [] };
 
-let articles = [];
-let ticker = [];
-let ads = [];
+let siteData = null;
+let sheetConnected = false;
 
-
-/* =========================================================
-   INIT
-   ========================================================= */
-
-document.addEventListener("DOMContentLoaded", () => {
-    setDefaultDateTime();
-    loadData();
-});
-
-
-/* =========================================================
-   TAB SWITCHING
-   ========================================================= */
-
-function openTab(tabId, button) {
-    document.querySelectorAll(".tab-content").forEach(el => el.classList.remove("active"));
-    document.querySelectorAll(".tab").forEach(el => el.classList.remove("active"));
-
-    const target = document.getElementById(tabId);
-    if (target) target.classList.add("active");
-    if (button) button.classList.add("active");
+function sheetReady() { 
+  return SCRIPT_URL && SCRIPT_URL.indexOf('PASTE_YOUR') === -1 && SCRIPT_URL.trim() !== ""; 
 }
-
-
-/* =========================================================
-   GET API
-   ========================================================= */
-
-async function apiGet() {
-    let response;
-    try {
-        response = await fetch(API_URL, {
-            method: "GET",
-            cache: "no-store",
-            redirect: "follow"
-        });
-    } catch (err) {
-        throw new Error("Network error: Server එකට සම්බන්ධ වීමට නොහැකි විය.");
-    }
-
-    if (!response.ok) {
-        throw new Error(`Server error: Status ${response.status}`);
-    }
-
-    const text = await response.text();
-    let data;
-
-    try {
-        data = JSON.parse(text);
-    } catch (error) {
-        throw new Error("Server එකෙන් නිවැරදි JSON response එකක් ලැබුණේ නැහැ.");
-    }
-
-    if (data.error) {
-        throw new Error(data.error);
-    }
-
-    return data;
-}
-
-
-/* =========================================================
-   POST API
-   ========================================================= */
-
-async function apiPost(payload) {
-    let response;
-    try {
-        response = await fetch(API_URL, {
-            method: "POST",
-            headers: {
-                "Content-Type": "text/plain;charset=utf-8"
-            },
-            body: JSON.stringify(payload),
-            redirect: "follow"
-        });
-    } catch (err) {
-        throw new Error("Network error: Data යැවීමට නොහැකි විය.");
-    }
-
-    if (!response.ok) {
-        throw new Error(`Server error: Status ${response.status}`);
-    }
-
-    const text = await response.text();
-    let data;
-
-    try {
-        data = JSON.parse(text);
-    } catch (error) {
-        throw new Error("Server response එක JSON ආකාරයෙන් නොමැත.");
-    }
-
-    if (!data.success) {
-        throw new Error(data.error || "POST request failed");
-    }
-
-    return data;
-}
-
-
-/* =========================================================
-   LOAD DATA
-   ========================================================= */
 
 async function loadData() {
-    showLoading(true);
-
+  if (sheetReady()) {
     try {
-        const data = await apiGet();
-
-        articles = Array.isArray(data.articles) ? data.articles : [];
-        ticker = Array.isArray(data.ticker) ? data.ticker : [];
-        ads = Array.isArray(data.ads) ? data.ads : [];
-
-        renderArticles();
-        renderTicker();
-        renderAds();
-        updateStats();
-
-        showToast("✅ Data loaded successfully.");
-    } catch (error) {
-        console.error(error);
-        showToast("❌ " + error.message);
-    } finally {
-        showLoading(false);
-    }
-}
-
-
-/* =========================================================
-   SAVE ARTICLE
-   ========================================================= */
-
-async function saveArticle() {
-    const title = document.getElementById("title").value.trim();
-
-    if (!title) {
-        showToast("⚠️ Title එක අනිවාර්යයි.");
+      const res = await fetch(SCRIPT_URL, { method: 'GET', cache: 'no-store' });
+      const json = await res.json();
+      if (json && json.articles) {
+        siteData = json;
+        sheetConnected = true;
+        if (!siteData.articles) siteData.articles = [];
+        if (!siteData.ticker) siteData.ticker = [];
         return;
+      }
+    } catch(e) {
+      console.error('Sheet fetch error:', e);
     }
+  }
 
-    const article = {
-        id: document.getElementById("articleId").value.trim(),
-        category: document.getElementById("category").value,
-        position: document.getElementById("position").value,
-        title: title,
-        desc: document.getElementById("desc").value.trim(),
-        img: document.getElementById("img").value.trim(),
-        youtube: document.getElementById("youtube").value.trim(),
-        date: document.getElementById("date").value,
-        time: document.getElementById("time").value
-    };
+  sheetConnected = false;
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    siteData = raw ? JSON.parse(raw) : JSON.parse(JSON.stringify(DEFAULT_DATA));
+  } catch(e) {
+    siteData = JSON.parse(JSON.stringify(DEFAULT_DATA));
+  }
 
-    showLoading(true);
-
-    try {
-        await apiPost({
-            action: "saveArticle",
-            article: article
-        });
-
-        showToast("✅ Article saved successfully.");
-        resetArticleForm();
-        await loadData();
-    } catch (error) {
-        console.error(error);
-        showToast("❌ " + error.message);
-    } finally {
-        showLoading(false);
-    }
+  if (!siteData.articles) siteData.articles = [];
+  if (!siteData.ticker) siteData.ticker = [];
 }
 
+async function callSheet(payload) {
+  await fetch(SCRIPT_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+    body: JSON.stringify(payload)
+  });
+}
 
-/* =========================================================
-   EDIT ARTICLE
-   ========================================================= */
+function persist() {
+  try { 
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(siteData)); 
+  } catch(e) { 
+    console.error("Storage error", e); 
+  }
+}
+
+function esc(s) { 
+  return (s || "").replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c])); 
+}
+
+async function tryLogin() {
+  const pw = document.getElementById('pwInput').value;
+  if (pw === ADMIN_PASSWORD) {
+    document.getElementById('loginErr').textContent = 'පූරණය වෙමින්...';
+    await loadData();
+    document.getElementById('loginView').style.display = 'none';
+    document.getElementById('dashView').style.display = 'block';
+
+    if (!sheetConnected) {
+      document.getElementById('sheetWarning').style.display = 'block';
+    } else {
+      document.getElementById('sheetWarning').style.display = 'none';
+    }
+
+    populateCategorySelect();
+    renderArticleList();
+    renderTickerEditor();
+  } else {
+    document.getElementById('loginErr').textContent = 'රහස්පදය වැරදියි. නැවත උත්සාහ කරන්න.';
+  }
+}
+
+function switchTab(tab) {
+  document.querySelectorAll('.admin-tabs button').forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
+  document.getElementById('tab-articles').style.display = tab === 'articles' ? 'block' : 'none';
+  document.getElementById('tab-ticker').style.display = tab === 'ticker' ? 'block' : 'none';
+}
+
+function populateCategorySelect() {
+  document.getElementById('f-category').innerHTML =
+    CATEGORIES.filter(c => c !== 'ප්‍රධාන පුවත්').map(c => `<option value="${esc(c)}">${esc(c)}</option>`).join('');
+}
+
+function renderArticleList() {
+  const posLabel = { hero: 'Hero', side: 'Side', grid: 'Grid', none: '—' };
+  document.getElementById('articleList').innerHTML = siteData.articles.map(a => `
+    <div class="art-row">
+      ${a.img ? `<img class="thumb" src="${esc(a.img)}" onerror="this.style.display='none'">` : `<div class="thumb"></div>`}
+      <div class="meta">
+        <span class="cat-tag">${esc(a.category)}</span><span class="pos-tag">${posLabel[a.position] || a.position}</span>
+        <h4>${esc(a.title)}</h4>
+      </div>
+      <div class="acts">
+        <button onclick="editArticle('${esc(a.id)}')">සංස්කරණය</button>
+        <button class="del" onclick="deleteArticle('${esc(a.id)}')">මකන්න</button>
+      </div>
+    </div>`).join('') || '<div class="empty-note">දැනට පුවත් නොමැත.</div>';
+}
 
 function editArticle(id) {
-    const article = articles.find(item => String(item.id) === String(id));
-
-    if (!article) {
-        showToast("Article එක හමු වුණේ නැහැ.");
-        return;
-    }
-
-    document.getElementById("articleId").value = article.id || "";
-    document.getElementById("category").value = article.category || "breaking";
-    document.getElementById("position").value = article.position || "grid";
-    document.getElementById("title").value = article.title || "";
-    document.getElementById("desc").value = article.desc || "";
-    document.getElementById("img").value = article.img || "";
-    document.getElementById("youtube").value = article.youtube || "";
-    document.getElementById("date").value = normalizeDate(article.date);
-    document.getElementById("time").value = normalizeTime(article.time);
-
-    document.getElementById("articleFormTitle").textContent = "✏️ පුවත සංස්කරණය කරන්න";
-
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
+  const a = siteData.articles.find(x => String(x.id) === String(id));
+  if (!a) return;
+  document.getElementById('f-id').value = a.id;
+  document.getElementById('f-category').value = a.category;
+  document.getElementById('f-position').value = a.position;
+  document.getElementById('f-title').value = a.title || '';
+  document.getElementById('f-desc').value = a.desc || '';
+  document.getElementById('f-img').value = a.img || '';
+  document.getElementById('artMsg').textContent = '';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
-
-
-/* =========================================================
-   DELETE ARTICLE
-   ========================================================= */
 
 async function deleteArticle(id) {
-    if (!confirm("මේ පුවත delete කරන්නද?")) {
-        return;
+  if (!confirm("මෙම පුවත මකා දැමීමට ඔබට විශ්වාසද?")) return;
+
+  siteData.articles = siteData.articles.filter(a => String(a.id) !== String(id));
+  persist();
+  renderArticleList();
+
+  if (sheetConnected) {
+    try { 
+      await callSheet({ action: 'deleteArticle', id }); 
+    } catch(e) { 
+      console.error(e); 
     }
+  }
+}
 
-    showLoading(true);
+async function saveArticle() {
+  const title = document.getElementById('f-title').value.trim();
+  if (!title) {
+    document.getElementById('artMsg').style.color = 'var(--brand-red)';
+    document.getElementById('artMsg').textContent = 'ශීර්ෂ පාඨයක් ඇතුළත් කරන්න.';
+    return;
+  }
 
+  const id = document.getElementById('f-id').value;
+  const data = {
+    category: document.getElementById('f-category').value,
+    position: document.getElementById('f-position').value,
+    title,
+    desc: document.getElementById('f-desc').value.trim(),
+    img: document.getElementById('f-img').value.trim()
+  };
+
+  if (id) {
+    data.id = id;
+    const idx = siteData.articles.findIndex(a => String(a.id) === String(id));
+    if (idx > -1) siteData.articles[idx] = { ...siteData.articles[idx], ...data };
+  } else {
+    data.id = 'a' + Date.now();
+    siteData.articles.unshift(data);
+  }
+
+  persist();
+  renderArticleList();
+
+  document.getElementById('artMsg').style.color = 'var(--green)';
+  document.getElementById('artMsg').textContent = sheetConnected ? 'සුරකිමින්... (Google Sheet එකට)' : 'සුරැකිණි ✓ (Browser එකේ පමණි)';
+
+  if (sheetConnected) {
     try {
-        await apiPost({
-            action: "deleteArticle",
-            id: id
-        });
-
-        showToast("✅ Article deleted.");
-        await loadData();
-    } catch (error) {
-        showToast("❌ " + error.message);
-    } finally {
-        showLoading(false);
+      await callSheet({ action: 'saveArticle', article: data });
+      document.getElementById('artMsg').textContent = 'සුරැකිණි ✓ (Google Sheet එකට)';
+    } catch(e) {
+      console.error(e);
+      document.getElementById('artMsg').style.color = 'var(--brand-red)';
+      document.getElementById('artMsg').textContent = 'Sheet එකට save කිරීම අසාර්ථකයි.';
     }
+  }
+
+  document.getElementById('f-id').value = '';
+  document.getElementById('f-title').value = '';
+  document.getElementById('f-desc').value = '';
+  document.getElementById('f-img').value = '';
+
+  setTimeout(() => { 
+    document.getElementById('artMsg').textContent = ''; 
+  }, 3500);
 }
 
-
-/* =========================================================
-   RESET ARTICLE FORM
-   ========================================================= */
-
-function resetArticleForm() {
-    document.getElementById("articleId").value = "";
-    document.getElementById("category").value = "breaking";
-    document.getElementById("position").value = "grid";
-    document.getElementById("title").value = "";
-    document.getElementById("desc").value = "";
-    document.getElementById("img").value = "";
-    document.getElementById("youtube").value = "";
-
-    setDefaultDateTime();
-
-    document.getElementById("articleFormTitle").textContent = "📝 නව පුවතක් එක් කරන්න";
+function renderTickerEditor() {
+  const wrap = document.getElementById('tickerEditor');
+  wrap.innerHTML = '';
+  siteData.ticker.forEach(text => addTickerRow(text));
+  if (siteData.ticker.length === 0) addTickerRow('');
 }
 
-
-/* =========================================================
-   RENDER ARTICLES
-   ========================================================= */
-
-function renderArticles() {
-    const container = document.getElementById("articleList");
-
-    if (!articles.length) {
-        container.innerHTML = `<div class="empty">📰 තවමත් Articles නැහැ.</div>`;
-        return;
-    }
-
-    // නවතම ලිපි පලමුව පෙන්වීම (Safe Date Parsing)
-    const sorted = [...articles].sort((a, b) => {
-        const getTime = (item) => {
-            const raw = item.updatedAt || (item.date ? `${item.date}T${item.time || '00:00'}` : '');
-            const t = new Date(raw).getTime();
-            return isNaN(t) ? 0 : t;
-        };
-        return getTime(b) - getTime(a);
-    });
-
-    container.innerHTML = sorted.map(article => {
-        const image = article.img && article.img.trim() ? escapeHtml(article.img) : "";
-        const title = escapeHtml(article.title || "");
-        const desc = escapeHtml(article.desc || "");
-        const category = escapeHtml(article.category || "");
-        const date = escapeHtml(article.date || "");
-        const time = escapeHtml(article.time || "");
-
-        const safeId = escapeAttr(escapeJs(article.id));
-
-        return `
-            <div class="article-card">
-                ${
-                    image
-                    ? `<img class="article-image" src="${image}" alt="" onerror="this.style.display='none'">`
-                    : `<div class="article-image" style="display:flex;align-items:center;justify-content:center;color:#999;">No Image</div>`
-                }
-                <div class="article-body">
-                    <span class="article-category">${category}</span>
-                    <div class="article-title">${title}</div>
-                    <div class="article-desc">${desc}</div>
-                    <div class="meta">
-                        📅 ${date}${time ? " • ⏰ " + time : ""}
-                    </div>
-                    <div class="actions">
-                        <button class="btn btn-secondary" onclick="editArticle('${safeId}')">✏️ Edit</button>
-                        <button class="btn btn-danger" onclick="deleteArticle('${safeId}')">🗑 Delete</button>
-                    </div>
-                </div>
-            </div>
-        `;
-    }).join("");
-}
-
-
-/* =========================================================
-   TICKER
-   ========================================================= */
-
-function renderTicker() {
-    const container = document.getElementById("tickerList");
-
-    let list = Array.isArray(ticker) ? [...ticker] : [];
-    if (!list.length) {
-        list = [""];
-    }
-
-    container.innerHTML = list.map(text => `
-        <div class="ticker-item">
-            <input type="text" class="ticker-input" value="${escapeAttr(text)}" placeholder="Ticker message...">
-            <button class="ticker-remove" onclick="removeTickerItem(this)">✕</button>
-        </div>
-    `).join("");
-}
-
-function addTickerItem() {
-    const container = document.getElementById("tickerList");
-    const div = document.createElement("div");
-    div.className = "ticker-item";
-    div.innerHTML = `
-        <input type="text" class="ticker-input" placeholder="Ticker message...">
-        <button class="ticker-remove" onclick="removeTickerItem(this)">✕</button>
-    `;
-    container.appendChild(div);
-}
-
-function removeTickerItem(button) {
-    if (button && button.parentElement) {
-        button.parentElement.remove();
-    }
+function addTickerRow(value) {
+  const wrap = document.getElementById('tickerEditor');
+  const row = document.createElement('div');
+  row.className = 't-row';
+  row.innerHTML = `<input value="${esc(value)}" placeholder="පුවත් පේළිය..."><button onclick="this.parentElement.remove()">✕</button>`;
+  wrap.appendChild(row);
 }
 
 async function saveTicker() {
-    const inputs = document.querySelectorAll(".ticker-input");
-    const values = Array.from(inputs).map(input => input.value.trim()).filter(Boolean);
+  const rows = Array.from(document.querySelectorAll('#tickerEditor .t-row input'));
+  siteData.ticker = rows.map(r => r.value.trim()).filter(Boolean);
+  persist();
 
-    showLoading(true);
+  const msg = document.getElementById('tickerMsg');
+  msg.style.color = 'var(--green)';
+  msg.textContent = sheetConnected ? 'සුරකිමින්...' : 'සුරැකිණි ✓ (Browser එකේ පමණි)';
 
+  if (sheetConnected) {
     try {
-        await apiPost({
-            action: "saveTicker",
-            ticker: values
-        });
-
-        showToast("✅ Ticker saved successfully.");
-        await loadData();
-    } catch (error) {
-        showToast("❌ " + error.message);
-    } finally {
-        showLoading(false);
+      await callSheet({ action: 'saveTicker', ticker: siteData.ticker });
+      msg.textContent = 'සුරැකිණි ✓ (Google Sheet එකට)';
+    } catch(e) {
+      console.error(e);
+      msg.style.color = 'var(--brand-red)';
+      msg.textContent = 'Sheet එකට save කිරීම අසාර්ථකයි.';
     }
-}
+  }
 
-
-/* =========================================================
-   ADS
-   ========================================================= */
-
-function renderAds() {
-    let data = Array.isArray(ads) ? [...ads] : [];
-
-    while (data.length < 4) {
-        data.push({
-            id: data.length + 1,
-            title: "",
-            subtitle: "",
-            img: "",
-            link: "#"
-        });
-    }
-
-    data = data.slice(0, 4);
-
-    const container = document.getElementById("adsList");
-
-    container.innerHTML = data.map((ad, index) => {
-        const item = ad || {};
-        const adId = item.id ?? (index + 1);
-        const adTitle = item.title || "";
-        const adSubtitle = item.subtitle || "";
-        const adImg = item.img || "";
-        const adLink = item.link || "#";
-
-        return `
-            <div class="ad-box">
-                <h3>Ad Slot ${index + 1}</h3>
-                <input type="hidden" class="ad-id" value="${escapeAttr(adId)}">
-
-                <label>Title</label>
-                <input class="ad-title" value="${escapeAttr(adTitle)}" placeholder="Advertisement title">
-                <br><br>
-
-                <label>Subtitle</label>
-                <input class="ad-subtitle" value="${escapeAttr(adSubtitle)}" placeholder="Advertisement subtitle">
-                <br><br>
-
-                <label>Image URL</label>
-                <input class="ad-img" value="${escapeAttr(adImg)}" placeholder="https://..." oninput="updateAdPreview(this)">
-                <img class="ad-preview" src="${escapeAttr(adImg)}" onerror="this.style.display='none'" ${adImg ? "" : 'style="display:none"'}>
-                <br><br>
-
-                <label>Link</label>
-                <input class="ad-link" value="${escapeAttr(adLink)}" placeholder="https://...">
-            </div>
-        `;
-    }).join("");
-}
-
-function updateAdPreview(input) {
-    const image = input.parentElement.querySelector(".ad-preview");
-    const url = input.value.trim();
-
-    if (!url) {
-        image.style.display = "none";
-        image.removeAttribute("src");
-        return;
-    }
-
-    image.src = url;
-    image.style.display = "block";
-}
-
-async function saveAds() {
-    const boxes = document.querySelectorAll(".ad-box");
-
-    const result = Array.from(boxes).map((box, index) => ({
-        id: box.querySelector(".ad-id").value || (index + 1),
-        title: box.querySelector(".ad-title").value.trim(),
-        subtitle: box.querySelector(".ad-subtitle").value.trim(),
-        img: box.querySelector(".ad-img").value.trim(),
-        link: box.querySelector(".ad-link").value.trim() || "#"
-    }));
-
-    showLoading(true);
-
-    try {
-        await apiPost({
-            action: "saveAds",
-            ads: result
-        });
-
-        showToast("✅ Ads saved successfully.");
-        await loadData();
-    } catch (error) {
-        showToast("❌ " + error.message);
-    } finally {
-        showLoading(false);
-    }
-}
-
-
-/* =========================================================
-   STATS
-   ========================================================= */
-
-function updateStats() {
-    document.getElementById("articleCount").textContent = articles.length;
-    document.getElementById("tickerCount").textContent = ticker.filter(Boolean).length;
-    document.getElementById("adsCount").textContent = ads.length;
-}
-
-
-/* =========================================================
-   DATE / TIME HELPERS
-   ========================================================= */
-
-function setDefaultDateTime() {
-    const now = new Date();
-    const year = now.getFullYear();
-    const month = String(now.getMonth() + 1).padStart(2, "0");
-    const day = String(now.getDate()).padStart(2, "0");
-    const hours = String(now.getHours()).padStart(2, "0");
-    const mins = String(now.getMinutes()).padStart(2, "0");
-
-    document.getElementById("date").value = `${year}-${month}-${day}`;
-    document.getElementById("time").value = `${hours}:${mins}`;
-}
-
-function normalizeDate(value) {
-    if (!value) return "";
-    const str = String(value).trim();
-    const match = str.match(/^\d{4}-\d{2}-\d{2}/);
-    if (match) return match[0];
-
-    const date = new Date(value);
-    if (!isNaN(date.getTime())) {
-        const year = date.getFullYear();
-        const month = String(date.getMonth() + 1).padStart(2, "0");
-        const day = String(date.getDate()).padStart(2, "0");
-        return `${year}-${month}-${day}`;
-    }
-    return str.slice(0, 10);
-}
-
-function normalizeTime(value) {
-    if (!value) return "";
-    const match = String(value).match(/(\d{1,2}):(\d{2})/);
-    if (!match) return "";
-    return String(Number(match[1])).padStart(2, "0") + ":" + match[2];
-}
-
-
-/* =========================================================
-   UI HELPERS
-   ========================================================= */
-
-function showLoading(show) {
-    document.getElementById("loading").classList.toggle("show", show);
-}
-
-function showToast(message) {
-    const toast = document.getElementById("toast");
-    toast.textContent = message;
-    toast.classList.add("show");
-
-    clearTimeout(window.__toastTimer);
-    window.__toastTimer = setTimeout(() => {
-        toast.classList.remove("show");
-    }, 3500);
-}
-
-
-/* =========================================================
-   ESCAPE HELPERS
-   ========================================================= */
-
-function escapeHtml(value) {
-    return String(value ?? "")
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
-}
-
-function escapeAttr(value) {
-    return escapeHtml(value);
-}
-
-function escapeJs(value) {
-    return String(value ?? "")
-        .replace(/\\/g, "\\\\")
-        .replace(/'/g, "\\'")
-        .replace(/"/g, '\\"')
-        .replace(/\n/g, "\\n")
-        .replace(/\r/g, "\\r");
+  setTimeout(() => { 
+    msg.textContent = ''; 
+  }, 3500);
 }
 </script>
-
 </body>
 </html>
