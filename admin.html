@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;600;700;800&family=Noto+Sans+Sinhala:wght@400;500;600;700&family=Yaldevi:wght@400;500;600&display=swap" rel="stylesheet">
-  
+
 <style>
   :root {
     --brand-navy: #0f172a;
@@ -178,6 +178,7 @@
     gap: 8px;
     margin-bottom: 22px;
     border-bottom: 2px solid var(--line);
+    overflow-x: auto;
   }
 
   .admin-tabs button {
@@ -190,6 +191,7 @@
     cursor: pointer;
     border-bottom: 3px solid transparent;
     margin-bottom: -2px;
+    white-space: nowrap;
   }
 
   .admin-tabs button.active {
@@ -315,6 +317,15 @@
     text-overflow: ellipsis;
   }
 
+  .art-row .meta p {
+    font-size: 12px;
+    color: var(--ink-soft);
+    margin: 2px 0 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
   .art-row .acts {
     display: flex;
     gap: 8px;
@@ -418,6 +429,7 @@
       <div class="admin-tabs">
         <button class="active" data-tab="articles" onclick="switchTab('articles')">පුවත් කළමනාකරණය</button>
         <button data-tab="ticker" onclick="switchTab('ticker')">නවතම පට්ටිය (Ticker)</button>
+        <button data-tab="ads" onclick="switchTab('ads')">දැන්වීම් කළමනාකරණය (Ads)</button>
       </div>
 
       <!-- TAB 1: ARTICLES MANAGEMENT -->
@@ -458,7 +470,7 @@
 
           <input type="hidden" id="f-id">
           
-          <button class="btn wide" onclick="saveArticle()">සුරකින්න (Save)</button>
+          <button class="btn wide" onclick="saveArticle()">සුරකින්න (Save Article)</button>
           <div class="save-msg" id="artMsg"></div>
         </div>
 
@@ -481,6 +493,49 @@
         </div>
       </div>
 
+      <!-- TAB 3: ADS MANAGEMENT -->
+      <div id="tab-ads" style="display:none;">
+        <div class="panel">
+          <h3 style="font-size:17px;margin:0 0 16px;">නව දැන්වීමක් එකතු කරන්න / සංස්කරණය කරන්න</h3>
+          
+          <div class="form-row">
+            <div class="field">
+              <label>දැන්වීම් නම / මාතෘකාව (Ad Title)</label>
+              <input id="f-ad-title" placeholder="උදා: Dialog Promo Banner">
+            </div>
+            <div class="field">
+              <label>පෙන්විය යුතු ස්ථානය (Position)</label>
+              <select id="f-ad-position">
+                <option value="top-header">Top Header Banner (ඉහළම Banner එක)</option>
+                <option value="sidebar">Sidebar Banner (පැති තීරුව)</option>
+                <option value="content-middle">In-Content (පුවත් මැද)</option>
+                <option value="footer">Footer Banner (පහළම Banner එක)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>දැන්වීම් රූප රාමුවේ URL (Banner Image URL)</label>
+            <input id="f-ad-img" placeholder="https://example.com/banner.jpg">
+          </div>
+
+          <div class="field">
+            <label>ලිපින යොමුව / Target Link (ලින්ක් එක ක්ලික් කළ විට යන URL එක)</label>
+            <input id="f-ad-link" placeholder="https://example.com or https://wa.me/...">
+          </div>
+
+          <input type="hidden" id="f-ad-id">
+          
+          <button class="btn wide" onclick="saveAd()">සුරකින්න (Save Ad)</button>
+          <div class="save-msg" id="adMsg"></div>
+        </div>
+
+        <h3 style="font-size:17px;margin:28px 0 14px;">දැනට පවතින දැන්වීම්</h3>
+        <div class="panel" id="adsListPanel">
+          <div id="adsList"></div>
+        </div>
+      </div>
+
     </div>
 
   </div>
@@ -494,7 +549,7 @@ const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzh-zk0QPQTvGaByS5fK
 const STORAGE_KEY = "site-data";
 const CATEGORIES = ['ප්‍රධාන පුවත්','දේශපාලනය','ක්‍රීඩා','ව්‍යාපාර','ලෝකය','විනෝදාංශය','තාක්ෂණය','ජීවන රටාව'];
 
-const DEFAULT_DATA = { ticker: [], articles: [] };
+const DEFAULT_DATA = { ticker: [], articles: [], ads: [] };
 
 let siteData = null;
 let sheetConnected = false;
@@ -508,11 +563,12 @@ async function loadData() {
     try {
       const res = await fetch(SCRIPT_URL, { method: 'GET', cache: 'no-store' });
       const json = await res.json();
-      if (json && json.articles) {
+      if (json && (json.articles || json.ads)) {
         siteData = json;
         sheetConnected = true;
         if (!siteData.articles) siteData.articles = [];
         if (!siteData.ticker) siteData.ticker = [];
+        if (!siteData.ads) siteData.ads = [];
         return;
       }
     } catch(e) {
@@ -530,6 +586,7 @@ async function loadData() {
 
   if (!siteData.articles) siteData.articles = [];
   if (!siteData.ticker) siteData.ticker = [];
+  if (!siteData.ads) siteData.ads = [];
 }
 
 async function callSheet(payload) {
@@ -569,6 +626,7 @@ async function tryLogin() {
     populateCategorySelect();
     renderArticleList();
     renderTickerEditor();
+    renderAdsList();
   } else {
     document.getElementById('loginErr').textContent = 'රහස්පදය වැරදියි. නැවත උත්සාහ කරන්න.';
   }
@@ -578,12 +636,15 @@ function switchTab(tab) {
   document.querySelectorAll('.admin-tabs button').forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
   document.getElementById('tab-articles').style.display = tab === 'articles' ? 'block' : 'none';
   document.getElementById('tab-ticker').style.display = tab === 'ticker' ? 'block' : 'none';
+  document.getElementById('tab-ads').style.display = tab === 'ads' ? 'block' : 'none';
 }
 
 function populateCategorySelect() {
   document.getElementById('f-category').innerHTML =
     CATEGORIES.filter(c => c !== 'ප්‍රධාන පුවත්').map(c => `<option value="${esc(c)}">${esc(c)}</option>`).join('');
 }
+
+/* --- ARTICLES MANAGEMENT --- */
 
 function renderArticleList() {
   const posLabel = { hero: 'Hero', side: 'Side', grid: 'Grid', none: '—' };
@@ -683,6 +744,8 @@ async function saveArticle() {
   }, 3500);
 }
 
+/* --- TICKER MANAGEMENT --- */
+
 function renderTickerEditor() {
   const wrap = document.getElementById('tickerEditor');
   wrap.innerHTML = '';
@@ -720,6 +783,113 @@ async function saveTicker() {
 
   setTimeout(() => { 
     msg.textContent = ''; 
+  }, 3500);
+}
+
+/* --- ADS MANAGEMENT --- */
+
+function renderAdsList() {
+  const adPosLabel = {
+    'top-header': 'Top Header',
+    'sidebar': 'Sidebar',
+    'content-middle': 'In-Content',
+    'footer': 'Footer'
+  };
+
+  document.getElementById('adsList').innerHTML = siteData.ads.map(ad => `
+    <div class="art-row">
+      ${ad.img ? `<img class="thumb" src="${esc(ad.img)}" onerror="this.style.display='none'">` : `<div class="thumb"></div>`}
+      <div class="meta">
+        <span class="pos-tag">${adPosLabel[ad.position] || ad.position}</span>
+        <h4>${esc(ad.title)}</h4>
+        <p>🔗 ${esc(ad.link || 'ලින්ක් එකක් නැත')}</p>
+      </div>
+      <div class="acts">
+        <button onclick="editAd('${esc(ad.id)}')">සංස්කරණය</button>
+        <button class="del" onclick="deleteAd('${esc(ad.id)}')">මකන්න</button>
+      </div>
+    </div>`).join('') || '<div class="empty-note">දැනට දැන්වීම් නොමැත.</div>';
+}
+
+function editAd(id) {
+  const ad = siteData.ads.find(x => String(x.id) === String(id));
+  if (!ad) return;
+  document.getElementById('f-ad-id').value = ad.id;
+  document.getElementById('f-ad-title').value = ad.title || '';
+  document.getElementById('f-ad-position').value = ad.position || 'top-header';
+  document.getElementById('f-ad-img').value = ad.img || '';
+  document.getElementById('f-ad-link').value = ad.link || '';
+  document.getElementById('adMsg').textContent = '';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+async function deleteAd(id) {
+  if (!confirm("මෙම දැන්වීම මකා දැමීමට ඔබට විශ්වාසද?")) return;
+
+  siteData.ads = siteData.ads.filter(ad => String(ad.id) !== String(id));
+  persist();
+  renderAdsList();
+
+  if (sheetConnected) {
+    try { 
+      await callSheet({ action: 'deleteAd', id }); 
+    } catch(e) { 
+      console.error(e); 
+    }
+  }
+}
+
+async function saveAd() {
+  const title = document.getElementById('f-ad-title').value.trim();
+  const img = document.getElementById('f-ad-img').value.trim();
+
+  if (!title || !img) {
+    document.getElementById('adMsg').style.color = 'var(--brand-red)';
+    document.getElementById('adMsg').textContent = 'දැන්වීමේ නම සහ Image URL එක ඇතුළත් කිරීම අනිවාර්යයි.';
+    return;
+  }
+
+  const id = document.getElementById('f-ad-id').value;
+  const data = {
+    title,
+    position: document.getElementById('f-ad-position').value,
+    img,
+    link: document.getElementById('f-ad-link').value.trim()
+  };
+
+  if (id) {
+    data.id = id;
+    const idx = siteData.ads.findIndex(a => String(a.id) === String(id));
+    if (idx > -1) siteData.ads[idx] = { ...siteData.ads[idx], ...data };
+  } else {
+    data.id = 'ad' + Date.now();
+    siteData.ads.unshift(data);
+  }
+
+  persist();
+  renderAdsList();
+
+  document.getElementById('adMsg').style.color = 'var(--green)';
+  document.getElementById('adMsg').textContent = sheetConnected ? 'සුරකිමින්... (Google Sheet එකට)' : 'සුරැකිණි ✓ (Browser එකේ පමණි)';
+
+  if (sheetConnected) {
+    try {
+      await callSheet({ action: 'saveAd', ad: data });
+      document.getElementById('adMsg').textContent = 'සුරැකිණි ✓ (Google Sheet එකට)';
+    } catch(e) {
+      console.error(e);
+      document.getElementById('adMsg').style.color = 'var(--brand-red)';
+      document.getElementById('adMsg').textContent = 'Sheet එකට save කිරීම අසාර්ථකයි.';
+    }
+  }
+
+  document.getElementById('f-ad-id').value = '';
+  document.getElementById('f-ad-title').value = '';
+  document.getElementById('f-ad-img').value = '';
+  document.getElementById('f-ad-link').value = '';
+
+  setTimeout(() => { 
+    document.getElementById('adMsg').textContent = ''; 
   }, 3500);
 }
 </script>
