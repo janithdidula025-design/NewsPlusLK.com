@@ -75,6 +75,98 @@
       font-family: inherit;
     }
 
+    /* =====================================================
+       SUPIRI PRELOADER / INTRO ANIMATION STYLES
+       ===================================================== */
+    .preloader {
+      position: fixed;
+      inset: 0;
+      z-index: 999999;
+      background: #071325;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.6s;
+    }
+
+    .preloader.fade-out {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .preloader-content {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 22px;
+      padding: 20px;
+    }
+
+    .preloader-logo-card {
+      background: #ffffff;
+      padding: 14px 24px;
+      border-radius: 20px;
+      box-shadow: 0 0 45px rgba(215, 25, 32, 0.45);
+      animation: logoGlowPulse 2s infinite ease-in-out;
+    }
+
+    .preloader-logo {
+      width: 240px;
+      height: 90px;
+      object-fit: contain;
+      display: block;
+    }
+
+    .preloader-bar-wrap {
+      width: 220px;
+      height: 5px;
+      background: rgba(255, 255, 255, 0.12);
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .preloader-bar {
+      width: 100%;
+      height: 100%;
+      background: var(--gradient);
+      border-radius: 10px;
+      animation: barAnimation 1.5s ease-in-out infinite;
+      transform-origin: left;
+    }
+
+    .preloader-tagline {
+      color: #94a3b8;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.8px;
+      animation: textPulse 1.5s infinite alternate;
+    }
+
+    @keyframes logoGlowPulse {
+      0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 0 30px rgba(215, 25, 32, 0.35);
+      }
+      50% {
+        transform: scale(1.05);
+        box-shadow: 0 0 55px rgba(215, 25, 32, 0.7);
+      }
+    }
+
+    @keyframes barAnimation {
+      0% { transform: translateX(-100%); }
+      50% { transform: translateX(0%); }
+      100% { transform: translateX(100%); }
+    }
+
+    @keyframes textPulse {
+      from { opacity: 0.5; }
+      to { opacity: 1; }
+    }
+
     /* PAGE ANIMATION */
     .container {
       animation: pageIn .55s ease;
@@ -192,7 +284,6 @@
       flex-shrink: 0;
     }
 
-    /* LOKU KARANA LADA LOGO EKA (320px x 120px) */
     .site-logo {
       width: 320px;
       height: 120px;
@@ -1031,7 +1122,6 @@
       margin-bottom: 20px;
     }
 
-    /* FOOTER LOGO LOKU KARANA LADA (240px x 95px) */
     .footer-logo-img {
       width: 240px;
       height: 95px;
@@ -1196,11 +1286,26 @@
       .header-search input { font-size: 12px; }
       .hero-main h2 { font-size: 18px; }
       .section-title { font-size: 17px; }
+      .preloader-logo { width: 180px; height: 70px; }
+      .preloader-bar-wrap { width: 180px; }
     }
   </style>
 </head>
 
 <body>
+
+<!-- PRELOADER / INTRO ANIMATION SCREEN -->
+<div class="preloader" id="preloader">
+  <div class="preloader-content">
+    <div class="preloader-logo-card">
+      <img src="https://raw.githubusercontent.com/janithdidula025-design/NewsPlusLK.com/545d4d6e03713055fca4fc7a4e33bc015e30b3fe/logo.jpeg" alt="NewsPlusLK" class="preloader-logo">
+    </div>
+    <div class="preloader-bar-wrap">
+      <div class="preloader-bar"></div>
+    </div>
+    <div class="preloader-tagline">DIGITAL NEWS NETWORK — එසැනින් පුවත්</div>
+  </div>
+</div>
 
 <!-- GOOGLE TRANSLATE -->
 <div id="google_translate_element"></div>
@@ -1345,7 +1450,7 @@
       <p class="footer-about-text">
         NewsPlusLK — ශ්‍රී ලංකාවේ සහ ලොව පුරා සිදු වන සියලුම පුවත් විශ්වාසනීයව, එසැනින් හා සත්‍යතාවයෙන් යුතුව ඔබ වෙත ගෙන එන ප්‍රමුඛතම ඩිජිටල් පුවත් වේදිකාවයි.
       </p>
-      <!-- SOCIAL MEDIA ICONS (UPDATED WITH FONTAWESOME) -->
+      <!-- SOCIAL MEDIA ICONS -->
       <div class="social-links">
         <a href="https://facebook.com" target="_blank" rel="noopener" class="social-btn fb" title="Facebook">
           <i class="fa-brands fa-facebook-f"></i>
@@ -1435,6 +1540,22 @@ let siteData = { ticker:[], articles:[], ads:[] };
 let currentCat = 'home';
 let categoryFilteredArticles = [];
 let showOlderArticlesState = false;
+
+/* PRELOADER CONTROLLER */
+function dismissPreloader(){
+  const preloader = document.getElementById('preloader');
+  if(preloader && !preloader.classList.contains('fade-out')){
+    preloader.classList.add('fade-out');
+  }
+}
+
+// Window fully loaded event with a slick short delay for high-end feel
+window.addEventListener('load', () => {
+  setTimeout(dismissPreloader, 1100);
+});
+
+// Fallback safety (Max 3 seconds)
+setTimeout(dismissPreloader, 3200);
 
 /* IS TODAY ARTICLE */
 function isTodayArticle(a){
@@ -1758,12 +1879,11 @@ function loadMoreCategoryItems(){
   renderCategoryGrid();
 }
 
-/* RENDER SITE MAIN - MODIFIED TO FILTER STRICTLY BY CATEGORY */
+/* RENDER SITE MAIN */
 function renderSite(){
   if(!siteData) return;
   const arts = siteData.articles || [];
 
-  // ප්‍රධාන පුවත් විතරක් තෝරා ගැනීම (Category filter for Main News)
   const mainNewsArts = arts.filter(a => matchCategory(a.category, 'ප්‍රධාන පුවත්') || !a.category);
 
   let hero = mainNewsArts.find(a => a.position === 'hero');
@@ -1778,7 +1898,7 @@ function renderSite(){
   const sports = arts.filter(a => matchCategory(a.category, 'ක්‍රීඩා')).slice(0,6);
   const biz = arts.filter(a => matchCategory(a.category, 'ව්‍යාපාර')).slice(0,6);
 
-  /* HERO & SIDE SECTION (ප්‍රධාන පුවත් පමණි) */
+  /* HERO & SIDE SECTION */
   document.getElementById('heroSection').innerHTML = `
     <article class="hero-main" onclick="${hero ? `openModal('${esc(hero.id)}')` : ''}">
       ${hero ? renderImageHtml(hero) : `<div class="ph"></div>`}
