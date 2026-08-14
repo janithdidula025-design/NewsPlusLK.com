@@ -192,10 +192,10 @@
       flex-shrink: 0;
     }
 
-    /* LOKU KARANA LADA LOGO EKA */
+    /* LOKU KARANA LADA LOGO EKA (320px x 120px) */
     .site-logo {
-      width: 230px;
-      height: 90px;
+      width: 320px;
+      height: 120px;
       object-fit: contain;
       display: block;
       transition: .3s ease;
@@ -212,7 +212,7 @@
     }
 
     .eyebrow {
-      font-size: 11px;
+      font-size: 12px;
       letter-spacing: 2.5px;
       font-weight: 800;
       color: var(--primary);
@@ -220,7 +220,7 @@
     }
 
     .tagline {
-      font-size: 13.5px;
+      font-size: 14px;
       color: var(--muted);
       font-weight: 500;
     }
@@ -1031,9 +1031,10 @@
       margin-bottom: 20px;
     }
 
+    /* FOOTER LOGO LOKU KARANA LADA (240px x 95px) */
     .footer-logo-img {
-      width: 180px;
-      height: 75px;
+      width: 240px;
+      height: 95px;
       object-fit: contain;
       background: #ffffff;
       border-radius: 12px;
@@ -1167,7 +1168,7 @@
       .utility-left { justify-content: center; }
       .site-header { padding: 15px 18px; }
       .header-inner { display: flex; flex-direction: column; text-align: center; gap: 8px; }
-      .site-logo { width: 180px; height: 75px; }
+      .site-logo { width: 240px; height: 90px; }
       .header-text { align-items: center; }
       .header-search { width: 100%; margin-top: 7px; }
       nav ul { justify-content: flex-start; padding: 6px 10px; }
@@ -1186,10 +1187,11 @@
       .side-item .img-wrapper, .side-item img, .side-item .ph { width: 80px; height: 80px; }
       .modal-box { padding: 20px; border-radius: 17px; }
       .footer-grid { grid-template-columns: 1fr; gap: 30px; }
+      .footer-logo-img { width: 200px; height: 80px; }
     }
 
     @media(max-width:430px){
-      .site-logo { width: 160px; height: 68px; }
+      .site-logo { width: 200px; height: 75px; }
       .tagline { font-size: 11.5px; }
       .header-search input { font-size: 12px; }
       .hero-main h2 { font-size: 18px; }
@@ -1262,7 +1264,7 @@
   <!-- HOME VIEW -->
   <div id="homeView">
     
-    <!-- MAIN HERO BLOCK -->
+    <!-- MAIN HERO BLOCK (ප්‍රධාන පුවත් විතරක් Load වේ) -->
     <section class="body-block">
       <div class="section-header-box">
         <div class="section-title-wrapper">
@@ -1756,16 +1758,19 @@ function loadMoreCategoryItems(){
   renderCategoryGrid();
 }
 
-/* RENDER SITE MAIN */
+/* RENDER SITE MAIN - MODIFIED TO FILTER STRICTLY BY CATEGORY */
 function renderSite(){
   if(!siteData) return;
   const arts = siteData.articles || [];
 
-  let hero = arts.find(a => a.position === 'hero');
-  let sides = arts.filter(a => a.position === 'side');
+  // ප්‍රධාන පුවත් විතරක් තෝරා ගැනීම (Category filter for Main News)
+  const mainNewsArts = arts.filter(a => matchCategory(a.category, 'ප්‍රධාන පුවත්') || !a.category);
 
-  if(!hero && arts.length > 0) hero = arts[0];
-  const unusedArts = arts.filter(a => a !== hero);
+  let hero = mainNewsArts.find(a => a.position === 'hero');
+  let sides = mainNewsArts.filter(a => a.position === 'side');
+
+  if(!hero && mainNewsArts.length > 0) hero = mainNewsArts[0];
+  const unusedArts = mainNewsArts.filter(a => a !== hero);
 
   if(sides.length === 0) sides = unusedArts.slice(0,4);
   sides = sides.slice(0,4);
@@ -1773,7 +1778,7 @@ function renderSite(){
   const sports = arts.filter(a => matchCategory(a.category, 'ක්‍රීඩා')).slice(0,6);
   const biz = arts.filter(a => matchCategory(a.category, 'ව්‍යාපාර')).slice(0,6);
 
-  /* HERO */
+  /* HERO & SIDE SECTION (ප්‍රධාන පුවත් පමණි) */
   document.getElementById('heroSection').innerHTML = `
     <article class="hero-main" onclick="${hero ? `openModal('${esc(hero.id)}')` : ''}">
       ${hero ? renderImageHtml(hero) : `<div class="ph"></div>`}
@@ -1781,7 +1786,7 @@ function renderSite(){
         <span class="kicker">${esc(hero ? hero.category : categories[0])}</span>
         ${hero && hero.time ? `<span class="time-badge">🕒 ${esc(hero.time)}</span>` : ''}
       </div>
-      <h2>${esc(hero ? hero.title : 'මෙම කොටසේ තවම පුවත් නොමැත')}</h2>
+      <h2>${esc(hero ? hero.title : 'මෙම කොටසේ තවම ප්‍රධාන පුවත් නොමැත')}</h2>
       <p class="dek">${esc(hero ? hero.desc : '')}</p>
     </article>
 
@@ -1854,7 +1859,7 @@ function openModal(id){
 function openAboutModal(){
   showGenericModal(`
     <div style="text-align:center;">
-      <img src="https://raw.githubusercontent.com/janithdidula025-design/NewsPlusLK.com/545d4d6e03713055fca4fc7a4e33bc015e30b3fe/logo.jpeg" style="width:180px;height:75px;object-fit:contain;margin-bottom:10px;" alt="NewsPlusLK">
+      <img src="https://raw.githubusercontent.com/janithdidula025-design/NewsPlusLK.com/545d4d6e03713055fca4fc7a4e33bc015e30b3fe/logo.jpeg" style="width:220px;height:90px;object-fit:contain;margin-bottom:10px;" alt="NewsPlusLK">
       <h2 style="color:var(--primary);font-size:23px;margin-bottom:14px;">අප ගැන</h2>
     </div>
     <p style="font-size:14px;line-height:1.9;color:var(--text-2);text-align:justify;">
