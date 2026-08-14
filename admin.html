@@ -3,7 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title> NEWS plusLk - ADMIN Panel </title>
+  <title>NewsPlusLK.com Admin Panel</title>
+  
+  <!-- Browser Tab Favicon Logo -->
+  <link rel="icon" type="image/jpeg" href="https://raw.githubusercontent.com/janithdidula025-design/NewsPlusLK.com/9092f05063c57582fd47ff119293718d0158ab7e/logo.jpeg">
+  <link rel="shortcut icon" type="image/jpeg" href="https://raw.githubusercontent.com/janithdidula025-design/NewsPlusLK.com/9092f05063c57582fd47ff119293718d0158ab7e/logo.jpeg">
   
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -107,7 +111,7 @@
       box-shadow: var(--shadow-md);
       border: 1px solid var(--border-color);
     }
-    .login-box img { max-height: 70px; margin-bottom: 16px; }
+    .login-box img { max-height: 70px; margin-bottom: 16px; border-radius: var(--radius-sm); }
     .login-box p { color: var(--text-muted); font-size: 14px; margin-bottom: 18px; }
     .login-box input {
       width: 100%;
@@ -175,7 +179,6 @@
     }
     .field input:focus, .field select:focus, .field textarea:focus { border-color: var(--brand-red); }
     
-    /* Beautiful Description Styling */
     .field textarea { 
       resize: vertical; 
       min-height: 120px; 
@@ -198,7 +201,6 @@
     .art-row .thumb { width: 75px; height: 55px; flex-shrink: 0; border-radius: var(--radius-sm); background: #e2e8f0; object-fit: cover; }
     .art-row .meta { flex: 1; min-width: 0; }
     
-    /* Metadata Tags */
     .tag-container { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; margin-bottom: 4px; }
     .art-row .meta .tag { display: inline-block; font-size: 10px; font-weight: 800; color: var(--brand-red); background: #fee2e2; padding: 2px 8px; border-radius: 4px; text-transform: uppercase; }
     .art-row .meta .time-tag { font-size: 11px; color: var(--text-muted); font-weight: 600; display: inline-flex; align-items: center; gap: 4px; }
@@ -221,8 +223,8 @@
 
   <header class="top">
     <div class="brand-header-left">
-      <img src="" alt="NEWS plusLk" class="admin-logo">
-      <h1 id="txt-app-title">NEWS plusLk - ADMIN Panel</h1>
+      <img src="https://raw.githubusercontent.com/janithdidula025-design/NewsPlusLK.com/9092f05063c57582fd47ff119293718d0158ab7e/logo.jpeg" alt="NewsPlusLK.com" class="admin-logo">
+      <h1 id="txt-app-title">NewsPlusLK.com · පරිපාලක පැනලය</h1>
     </div>
     <div class="header-actions">
       <div class="lang-picker">
@@ -238,7 +240,7 @@
 
     <!-- Login Section -->
     <div id="loginView" class="login-box">
-      <img src="https://raw.githubusercontent.com/janithdidula025-design/NEWS/f1a041b272990f893804db4da243cfa7b1ae3550/logo.jpeg" alt="Logo">
+      <img src="https://raw.githubusercontent.com/janithdidula025-design/NewsPlusLK.com/9092f05063c57582fd47ff119293718d0158ab7e/logo.jpeg" alt="NewsPlusLK.com Logo">
       <p id="txt-login-desc">ඉදිරියට යාමට පරිපාලක රහස්පදය ඇතුළත් කරන්න.</p>
       <input type="password" id="pwInput" placeholder="රහස්පදය" onkeydown="if(event.key==='Enter')tryLogin()">
       <button class="btn wide" onclick="tryLogin()" id="btn-login">ඇතුල් වන්න</button>
@@ -359,7 +361,7 @@
 
           <div class="field">
             <label id="lbl-ad-subtitle">උපශීර්ෂය / විස්තරය</label>
-            <input id="f-ad-subtitle" placeholder="උදා: සම්බන්ධ කරගන්න: 07X XXXXXXX | Lanka News Now">
+            <input id="f-ad-subtitle" placeholder="උදා: සම්බන්ධ කරගන්න: 07X XXXXXXX | NewsPlusLK.com">
           </div>
 
           <div class="form-row">
@@ -404,16 +406,15 @@ const STORAGE_KEY = "site-data";
 const LANG_KEY = "admin-lang";
 
 const DEFAULT_ADS = [
-  { id: 1, title: "ඔබගේ விளம்பரம் / දැන්වීම් මෙහි පළකරන්න", subtitle: "සම්බන්ධ වන්න: 07X XXX XXXX | Lanka News Now", link: "#", img: "" },
+  { id: 1, title: "ඔබගේ விளம்பரம் / දැන්වීම් මෙහි පළකරන්න", subtitle: "සම්බන්ධ වන්න: 07X XXX XXXX | NewsPlusLK.com", link: "#", img: "" },
   { id: 2, title: "Special Business Promotion Slot 02", subtitle: "Contact Us for Premium Banner Placements", link: "#", img: "" },
-  { id: 3, title: "Commercial Ad Space 03", subtitle: "Grow your reach island-wide with Lanka News Now", link: "#", img: "" },
+  { id: 3, title: "Commercial Ad Space 03", subtitle: "Grow your reach island-wide with NewsPlusLK.com", link: "#", img: "" },
   { id: 4, title: "Brand Sponsorship Slot 04", subtitle: "24/7 High Visibility Banner Placement", link: "#", img: "" }
 ];
 
-// Updated Categories (Removed Politics and Lifestyle)
 const i18n = {
   si: {
-    appTitle: "ලංකා NEWS NOW · පරිපාලක පැනලය",
+    appTitle: "NewsPlusLK.com · පරිපාලක පැනලය",
     backLink: "← වෙබ් අඩවියට යන්න",
     loginDesc: "ඉදිරියට යාමට පරිපාලක රහස්පදය ඇතුළත් කරන්න.",
     pwPlaceholder: "රහස්පදය",
@@ -458,7 +459,7 @@ const i18n = {
     categories: ['ප්‍රධාන පුවත්','ක්‍රීඩා','ව්‍යාපාර','ලෝකය','විනෝදාංශය','තාක්ෂණය']
   },
   en: {
-    appTitle: "Lanka NEWS NOW · Admin Panel",
+    appTitle: "NewsPlusLK.com · Admin Panel",
     backLink: "← Go to Website",
     loginDesc: "Enter admin password to continue.",
     pwPlaceholder: "Password",
@@ -503,7 +504,7 @@ const i18n = {
     categories: ['Main News','Sports','Business','World','Entertainment','Technology']
   },
   ta: {
-    appTitle: "லங்கா NEWS NOW · நிர்வாகக் குழு",
+    appTitle: "NewsPlusLK.com · நிர்வாகக் குழு",
     backLink: "← இணையதளத்திற்குச் செல்லவும்",
     loginDesc: "தொடர கடவுச்சொல்லை உள்ளிடவும்.",
     pwPlaceholder: "கடவுச்சொல்",
@@ -699,15 +700,14 @@ function populateCategorySelect(){
     cats.map(c=>`<option value="${esc(c)}">${esc(c)}</option>`).join('');
 }
 
-/* Format Current Date & Time */
 function getCurrentFormattedTime() {
   const now = new Date();
-  const dateStr = now.toLocaleDateString('en-CA'); // YYYY-MM-DD
+  const dateStr = now.toLocaleDateString('en-CA');
   let hours = now.getHours();
   const minutes = now.getMinutes().toString().padStart(2, '0');
   const ampm = hours >= 12 ? 'PM' : 'AM';
   hours = hours % 12;
-  hours = hours ? hours : 12; // 0 should be 12
+  hours = hours ? hours : 12;
   const timeStr = `${hours.toString().padStart(2, '0')}:${minutes} ${ampm}`;
   return `${dateStr} - ${timeStr}`;
 }
@@ -820,7 +820,6 @@ async function saveArticle(){
   setTimeout(()=>{ document.getElementById('artMsg').textContent=''; }, 3500);
 }
 
-/* Ticker Functions */
 function renderTickerEditor(){
   const wrap = document.getElementById('tickerEditor');
   wrap.innerHTML = '';
@@ -858,7 +857,6 @@ async function saveTicker(){
   setTimeout(()=>{ msg.textContent=''; }, 3500);
 }
 
-/* Ads Management Functions */
 function renderAdList(){
   const t = i18n[currentLang];
   document.getElementById('adList').innerHTML = siteData.ads.map((ad, idx)=>`
