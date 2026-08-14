@@ -12,10 +12,12 @@
   <link rel="icon" type="image/jpeg" href="https://raw.githubusercontent.com/janithdidula025-design/NewsPlusLK.com/545d4d6e03713055fca4fc7a4e33bc015e30b3fe/logo.jpeg">
   <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/janithdidula025-design/NewsPlusLK.com/545d4d6e03713055fca4fc7a4e33bc015e30b3fe/logo.jpeg">
 
-  <!-- Fonts -->
+  <!-- Fonts & Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+Sinhala:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- FontAwesome for Social Media Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
   <style>
     /* =====================================================
@@ -165,7 +167,7 @@
     }
 
     /* =====================================================
-       HEADER
+       HEADER & ENLARGED LOGO
        ===================================================== */
     .site-header {
       background: #ffffff;
@@ -190,9 +192,10 @@
       flex-shrink: 0;
     }
 
+    /* LOKU KARANA LADA LOGO EKA */
     .site-logo {
-      width: 155px;
-      height: 72px;
+      width: 230px;
+      height: 90px;
       object-fit: contain;
       display: block;
       transition: .3s ease;
@@ -209,7 +212,7 @@
     }
 
     .eyebrow {
-      font-size: 10px;
+      font-size: 11px;
       letter-spacing: 2.5px;
       font-weight: 800;
       color: var(--primary);
@@ -217,7 +220,7 @@
     }
 
     .tagline {
-      font-size: 13px;
+      font-size: 13.5px;
       color: var(--muted);
       font-weight: 500;
     }
@@ -371,7 +374,7 @@
     }
 
     /* =====================================================
-       MAIN CONTAINER & LAYOUT STYLES (NEW SHAPES/BLOCKS)
+       MAIN CONTAINER & LAYOUT STYLES
        ===================================================== */
     .container {
       max-width: 1280px;
@@ -379,7 +382,6 @@
       padding: 0 18px;
     }
 
-    /* SECTION HEADER STYLES (නව හැඩතල) */
     .section-header-box {
       display: flex;
       align-items: center;
@@ -445,7 +447,7 @@
       box-shadow: var(--shadow);
     }
 
-    /* ADS */
+    /* ADS STYLES */
     .ad-slot-container {
       width: 100%;
       margin: 0 !important;
@@ -982,7 +984,7 @@
     }
 
     /* =====================================================
-       REDESIGNED MULTI-COLUMN MODERN FOOTER
+       REDESIGNED MULTI-COLUMN MODERN FOOTER & SOCIAL ICONS
        ===================================================== */
     footer {
       background: #071325;
@@ -1030,46 +1032,47 @@
     }
 
     .footer-logo-img {
-      width: 140px;
-      height: 60px;
+      width: 180px;
+      height: 75px;
       object-fit: contain;
       background: #ffffff;
       border-radius: 12px;
-      padding: 6px;
+      padding: 8px;
       box-shadow: 0 4px 15px rgba(0,0,0,0.3);
     }
 
+    /* MODERN SOCIAL ICONS WITH BRAND COLORS ON HOVER */
     .social-links {
       display: flex;
-      gap: 10px;
+      gap: 12px;
+      flex-wrap: wrap;
     }
 
     .social-btn {
-      width: 38px;
-      height: 38px;
+      width: 42px;
+      height: 42px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #fff;
+      color: #ffffff;
+      font-size: 18px;
       text-decoration: none;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: rgba(255, 255, 255, 0.08);
       transition: all 0.3s ease;
     }
 
     .social-btn:hover {
       transform: translateY(-4px);
-      background: var(--primary);
-      border-color: var(--primary);
-      box-shadow: 0 6px 18px rgba(215, 25, 32, 0.35);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
     }
 
-    .social-btn svg {
-      width: 16px;
-      height: 16px;
-      fill: currentColor;
-    }
+    .social-btn.fb:hover { background: #1877F2; border-color: #1877F2; }
+    .social-btn.ig:hover { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%); border-color: transparent; }
+    .social-btn.x-twitter:hover { background: #000000; border-color: #333; }
+    .social-btn.yt:hover { background: #FF0000; border-color: #FF0000; }
+    .social-btn.wa:hover { background: #25D366; border-color: #25D366; }
 
     .footer-links-list {
       list-style: none;
@@ -1164,7 +1167,7 @@
       .utility-left { justify-content: center; }
       .site-header { padding: 15px 18px; }
       .header-inner { display: flex; flex-direction: column; text-align: center; gap: 8px; }
-      .site-logo { width: 145px; height: 68px; }
+      .site-logo { width: 180px; height: 75px; }
       .header-text { align-items: center; }
       .header-search { width: 100%; margin-top: 7px; }
       nav ul { justify-content: flex-start; padding: 6px 10px; }
@@ -1186,7 +1189,7 @@
     }
 
     @media(max-width:430px){
-      .site-logo { width: 135px; height: 62px; }
+      .site-logo { width: 160px; height: 68px; }
       .tagline { font-size: 11.5px; }
       .header-search input { font-size: 12px; }
       .hero-main h2 { font-size: 18px; }
@@ -1253,7 +1256,7 @@
 <!-- MAIN CONTENT CONTAINER -->
 <div class="container">
 
-  <!-- AD 1 -->
+  <!-- AD SLOT 1 -->
   <div id="ad-slot-1" class="ad-slot-container"></div>
 
   <!-- HOME VIEW -->
@@ -1270,6 +1273,7 @@
       <div class="hero-grid" id="heroSection"></div>
     </section>
 
+    <!-- AD SLOTS 2 & 3 -->
     <div id="ad-slot-2" class="ad-slot-container"></div>
     <div id="ad-slot-3" class="ad-slot-container"></div>
 
@@ -1294,6 +1298,7 @@
       </div>
     </section>
 
+    <!-- AD SLOT 4 -->
     <div id="ad-slot-4" class="ad-slot-container"></div>
   </div>
 
@@ -1338,18 +1343,22 @@
       <p class="footer-about-text">
         NewsPlusLK — ශ්‍රී ලංකාවේ සහ ලොව පුරා සිදු වන සියලුම පුවත් විශ්වාසනීයව, එසැනින් හා සත්‍යතාවයෙන් යුතුව ඔබ වෙත ගෙන එන ප්‍රමුඛතම ඩිජිටල් පුවත් වේදිකාවයි.
       </p>
+      <!-- SOCIAL MEDIA ICONS (UPDATED WITH FONTAWESOME) -->
       <div class="social-links">
-        <a href="https://facebook.com" target="_blank" rel="noopener" class="social-btn" title="Facebook">
-          <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12S0 5.446 0 12.073c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        <a href="https://facebook.com" target="_blank" rel="noopener" class="social-btn fb" title="Facebook">
+          <i class="fa-brands fa-facebook-f"></i>
         </a>
-        <a href="https://instagram.com" target="_blank" rel="noopener" class="social-btn" title="Instagram">
-          <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.28-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.07 4.849-.07zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618-6.98-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073z"/></svg>
+        <a href="https://instagram.com" target="_blank" rel="noopener" class="social-btn ig" title="Instagram">
+          <i class="fa-brands fa-instagram"></i>
         </a>
-        <a href="https://x.com" target="_blank" rel="noopener" class="social-btn" title="X">
-          <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231z"/></svg>
+        <a href="https://x.com" target="_blank" rel="noopener" class="social-btn x-twitter" title="X">
+          <i class="fa-brands fa-x-twitter"></i>
         </a>
-        <a href="https://youtube.com" target="_blank" rel="noopener" class="social-btn" title="YouTube">
-          <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814z"/></svg>
+        <a href="https://youtube.com" target="_blank" rel="noopener" class="social-btn yt" title="YouTube">
+          <i class="fa-brands fa-youtube"></i>
+        </a>
+        <a href="https://whatsapp.com" target="_blank" rel="noopener" class="social-btn wa" title="WhatsApp">
+          <i class="fa-brands fa-whatsapp"></i>
         </a>
       </div>
     </div>
@@ -1845,7 +1854,7 @@ function openModal(id){
 function openAboutModal(){
   showGenericModal(`
     <div style="text-align:center;">
-      <img src="https://raw.githubusercontent.com/janithdidula025-design/NewsPlusLK.com/545d4d6e03713055fca4fc7a4e33bc015e30b3fe/logo.jpeg" style="width:150px;height:70px;object-fit:contain;margin-bottom:10px;" alt="NewsPlusLK">
+      <img src="https://raw.githubusercontent.com/janithdidula025-design/NewsPlusLK.com/545d4d6e03713055fca4fc7a4e33bc015e30b3fe/logo.jpeg" style="width:180px;height:75px;object-fit:contain;margin-bottom:10px;" alt="NewsPlusLK">
       <h2 style="color:var(--primary);font-size:23px;margin-bottom:14px;">අප ගැන</h2>
     </div>
     <p style="font-size:14px;line-height:1.9;color:var(--text-2);text-align:justify;">
