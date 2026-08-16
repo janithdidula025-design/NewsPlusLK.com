@@ -8,15 +8,14 @@
 
   <title>NewsPlusLK — එසැනින් විශ්වාසනීය පුවත්</title>
 
-  <!-- LOGO -->
+  <!-- LOGO & FAVICON -->
   <link rel="icon" type="image/jpeg" href="https://raw.githubusercontent.com/janithdidula025-design/NewsPlusLK.com/545d4d6e03713055fca4fc7a4e33bc015e30b3fe/logo.jpeg">
   <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/janithdidula025-design/NewsPlusLK.com/545d4d6e03713055fca4fc7a4e33bc015e30b3fe/logo.jpeg">
 
-  <!-- Fonts & Icons -->
+  <!-- FONTS & ICONS -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+Sinhala:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <!-- FontAwesome for Social Media Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
   <style>
@@ -76,7 +75,7 @@
     }
 
     /* =====================================================
-       PRELOADER (EXACTLY 1 SECOND FADE OUT)
+       PRELOADER
        ===================================================== */
     .preloader {
       position: fixed;
@@ -164,7 +163,7 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* GOOGLE TRANSLATE HIDE */
+    /* GOOGLE TRANSLATE HIDE BANNER */
     .goog-te-banner-frame, .goog-te-balloon-frame, .skiptranslate, .VIpgJd-yD05fe-SMPvfL-i486fe {
       display: none !important;
     }
@@ -246,7 +245,7 @@
     }
 
     /* =====================================================
-       HEADER WITH AUTO-CHANGING SRI LANKAN SLIDER BACKGROUND
+       HEADER
        ===================================================== */
     .site-header {
       position: relative;
@@ -256,7 +255,6 @@
       background: #0b1f3a;
     }
 
-    /* BACKGROUND SLIDER STYLES */
     .header-bg-slider {
       position: absolute;
       inset: 0;
@@ -274,7 +272,7 @@
     }
 
     .bg-slide.active {
-      opacity: 0.22; /* Light overlay effect for clean contrast */
+      opacity: 0.22;
     }
 
     .header-overlay {
@@ -303,7 +301,6 @@
       flex-shrink: 0;
     }
 
-    /* ENLARGED & PROMINENT LOGO */
     .site-logo {
       width: 380px;
       height: 135px;
@@ -490,7 +487,7 @@
     }
 
     /* =====================================================
-       MAIN CONTAINER & LAYOUT STYLES
+       MAIN LAYOUT & CARDS
        ===================================================== */
     .container {
       max-width: 1280px;
@@ -563,7 +560,7 @@
       box-shadow: var(--shadow);
     }
 
-    /* ADS STYLES */
+    /* ADS */
     .ad-slot-container {
       width: 100%;
       margin: 0 !important;
@@ -747,7 +744,7 @@
       margin-top: 5px;
     }
 
-    /* PLAY OVERLAY */
+    /* PLAY OVERLAY FOR VIDEOS */
     .img-wrapper {
       position: relative;
       overflow: hidden;
@@ -1100,7 +1097,7 @@
     }
 
     /* =====================================================
-       REDESIGNED MULTI-COLUMN MODERN FOOTER & SOCIAL ICONS
+       FOOTER
        ===================================================== */
     footer {
       background: #071325;
@@ -1157,7 +1154,6 @@
       box-shadow: 0 4px 15px rgba(0,0,0,0.3);
     }
 
-    /* MODERN SOCIAL ICONS WITH BRAND COLORS ON HOVER */
     .social-links {
       display: flex;
       gap: 12px;
@@ -1265,7 +1261,7 @@
       transform: translateY(-4px);
     }
 
-    /* RESPONSIVE DESIGN ADJUSTMENTS */
+    /* RESPONSIVE DESIGN */
     @media(max-width:1050px){
       .header-inner { grid-template-columns: auto 1fr; }
       .header-search { grid-column: 1/-1; width: 100%; max-width: 500px; margin: auto; }
@@ -1319,7 +1315,7 @@
 
 <body>
 
-<!-- PRELOADER (LOADS IN EXACTLY 1 SECOND) -->
+<!-- PRELOADER -->
 <div class="preloader" id="preloader">
   <div class="preloader-content">
     <div class="preloader-logo-card">
@@ -1332,10 +1328,10 @@
   </div>
 </div>
 
-<!-- GOOGLE TRANSLATE -->
+<!-- GOOGLE TRANSLATE ELEMENT -->
 <div id="google_translate_element"></div>
 
-<!-- TOP BAR -->
+<!-- TOP UTILITY BAR -->
 <div class="utility-bar">
   <div class="utility-left">
     <div id="today-date">--</div>
@@ -1353,17 +1349,12 @@
   </div>
 </div>
 
-<!-- HEADER WITH SLIDER BACKGROUND & ENLARGED LOGO -->
+<!-- HEADER -->
 <header class="site-header">
-  <!-- AUTO CHANGING BACKGROUND SLIDER -->
   <div class="header-bg-slider" id="headerBgSlider">
-    <!-- Image 1: Colombo Skyline -->
     <div class="bg-slide active" style="background-image: url('https://images.unsplash.com/photo-1586861635167-e5223aadc9fe?auto=format&fit=crop&w=1600&q=80');"></div>
-    <!-- Image 2: Lotus Tower & City -->
     <div class="bg-slide" style="background-image: url('https://images.unsplash.com/photo-1546708973-b339540b5162?auto=format&fit=crop&w=1600&q=80');"></div>
-    <!-- Image 3: Sri Lanka Parliament / Heritage -->
     <div class="bg-slide" style="background-image: url('https://images.unsplash.com/photo-1578564499878-4360a0f5d72f?auto=format&fit=crop&w=1600&q=80');"></div>
-    <!-- Image 4: Sri Lanka Coast/Media Vibe -->
     <div class="bg-slide" style="background-image: url('https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?auto=format&fit=crop&w=1600&q=80');"></div>
   </div>
 
@@ -1376,7 +1367,7 @@
 
     <div class="header-search">
       <input type="text" id="searchInput" placeholder="පුවත් සොයන්න..." onkeydown="if(event.key==='Enter')doSearch()">
-      <button onclick="doSearch()">Search</button>
+      <button onclick="doSearch()"><i class="fa-solid fa-magnifying-glass"></i></button>
     </div>
   </div>
 </header>
@@ -1386,7 +1377,7 @@
   <ul id="navList"></ul>
 </nav>
 
-<!-- BREAKING NEWS -->
+<!-- BREAKING NEWS TICKER -->
 <div class="ticker-container">
   <div class="ticker-label">🔴 එසැනින්</div>
   <div class="ticker-track">
@@ -1394,16 +1385,13 @@
   </div>
 </div>
 
-<!-- MAIN CONTENT CONTAINER -->
+<!-- MAIN CONTENT -->
 <div class="container">
 
-  <!-- AD SLOT 1 -->
   <div id="ad-slot-1" class="ad-slot-container"></div>
 
   <!-- HOME VIEW -->
   <div id="homeView">
-    
-    <!-- MAIN HERO BLOCK -->
     <section class="body-block">
       <div class="section-header-box">
         <div class="section-title-wrapper">
@@ -1414,11 +1402,9 @@
       <div class="hero-grid" id="heroSection"></div>
     </section>
 
-    <!-- AD SLOTS 2 & 3 -->
     <div id="ad-slot-2" class="ad-slot-container"></div>
     <div id="ad-slot-3" class="ad-slot-container"></div>
 
-    <!-- SPORTS & BUSINESS BLOCK -->
     <section class="body-block">
       <div class="section-header-box">
         <div class="section-title-wrapper">
@@ -1439,7 +1425,6 @@
       </div>
     </section>
 
-    <!-- AD SLOT 4 -->
     <div id="ad-slot-4" class="ad-slot-container"></div>
   </div>
 
@@ -1464,7 +1449,7 @@
 
 </div>
 
-<!-- MODAL -->
+<!-- ARTICLE & GENERAL MODAL -->
 <div class="modal" id="articleModal">
   <div class="modal-box">
     <button class="modal-close" onclick="closeModal()">&times;</button>
@@ -1475,16 +1460,14 @@
 <!-- BACK TO TOP BUTTON -->
 <button class="back-to-top" id="backToTopBtn" onclick="scrollToTop()">▲</button>
 
-<!-- MODERN MULTI-COLUMN FOOTER -->
+<!-- FOOTER -->
 <footer>
   <div class="footer-grid">
-    <!-- COL 1: BRAND & ABOUT -->
     <div class="footer-col">
       <img src="https://raw.githubusercontent.com/janithdidula025-design/NewsPlusLK.com/545d4d6e03713055fca4fc7a4e33bc015e30b3fe/logo.jpeg" alt="NewsPlusLK Logo" class="footer-logo-img">
       <p class="footer-about-text">
         NewsPlusLK — ශ්‍රී ලංකාවේ සහ ලොව පුරා සිදු වන සියලුම පුවත් විශ්වාසනීයව, එසැනින් හා සත්‍යතාවයෙන් යුතුව ඔබ වෙත ගෙන එන ප්‍රමුඛතම ඩිජිටල් පුවත් වේදිකාවයි.
       </p>
-      <!-- SOCIAL MEDIA ICONS -->
       <div class="social-links">
         <a href="https://facebook.com" target="_blank" rel="noopener" class="social-btn fb" title="Facebook">
           <i class="fa-brands fa-facebook-f"></i>
@@ -1504,7 +1487,6 @@
       </div>
     </div>
 
-    <!-- COL 2: QUICK LINKS -->
     <div class="footer-col">
       <h4>ඉක්මන් පිවිසුම්</h4>
       <ul class="footer-links-list">
@@ -1516,7 +1498,6 @@
       </ul>
     </div>
 
-    <!-- COL 3: CATEGORIES -->
     <div class="footer-col">
       <h4>පුවත් අංශ</h4>
       <ul class="footer-links-list">
@@ -1528,7 +1509,6 @@
       </ul>
     </div>
 
-    <!-- COL 4: CONTACT INFO -->
     <div class="footer-col">
       <h4>සම්බන්ධ වන්න</h4>
       <div class="footer-contact-item">
@@ -1563,7 +1543,7 @@ function googleTranslateElementInit(){
 </script>
 <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
-<!-- MAIN SCRIPT -->
+<!-- MAIN APPLICATION LOGIC -->
 <script>
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzYs3pccTTh2GI8bcW59Xz80knSS4GtpGMH0W4ddMPuJdPbhz7Vh8BOr6n8a3Gq8byRyA/exec";
 const STORAGE_KEY = "site-data";
@@ -1575,18 +1555,16 @@ let currentCat = 'home';
 let categoryFilteredArticles = [];
 let showOlderArticlesState = false;
 
-/* PRELOADER CONTROLLER - SET EXACTLY TO 1 SECOND (1000ms) */
+/* PRELOADER CONTROLLER */
 function dismissPreloader(){
   const preloader = document.getElementById('preloader');
   if(preloader && !preloader.classList.contains('fade-out')){
     preloader.classList.add('fade-out');
   }
 }
-
-// Dismiss preloader after exactly 1 second
 setTimeout(dismissPreloader, 1000);
 
-/* HEADER BACKGROUND AUTO-SLIDER (EVERY 5 SECONDS) */
+/* HEADER SLIDER */
 function initHeaderSlider(){
   const slides = document.querySelectorAll('.header-bg-slider .bg-slide');
   if(!slides.length) return;
@@ -1596,10 +1574,10 @@ function initHeaderSlider(){
     slides[currentSlide].classList.remove('active');
     currentSlide = (currentSlide + 1) % slides.length;
     slides[currentSlide].classList.add('active');
-  }, 5000); // 5 Seconds
+  }, 5000);
 }
 
-/* IS TODAY ARTICLE */
+/* IS TODAY ARTICLE CHECKER */
 function isTodayArticle(a){
   if(!a) return false;
   const val = (a.date || a.time || '').trim();
@@ -1623,7 +1601,7 @@ function isTodayArticle(a){
   return keywords.some(kw => val.includes(kw));
 }
 
-/* COLOMBO WEATHER ONLY (DIRECT LOAD) */
+/* COLOMBO WEATHER API */
 async function fetchColomboWeather(){
   try {
     const res = await fetch('https://api.open-meteo.com/v1/forecast?latitude=6.9271&longitude=79.8612&current_weather=true');
@@ -1660,7 +1638,7 @@ function orderNewestFirst(articles){
   return (articles || []).slice().reverse();
 }
 
-/* TRANSLATION LOGIC */
+/* TRANSLATION SYSTEM */
 function translatePage(langCode){
   document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
   const activeBtn = document.getElementById(`btn-lang-${langCode}`);
@@ -1698,7 +1676,7 @@ function initActiveLanguage(){
   }
 }
 
-/* DATE */
+/* DATE HELPER */
 function updateDate(){
   const d = new Date();
   const options = { weekday:'long', year:'numeric', month:'long', day:'numeric' };
@@ -1737,7 +1715,7 @@ async function loadData(){
   renderSite();
 }
 
-/* UTILITY HELPERS */
+/* UTILITIES */
 function esc(s){
   return (s || "").replace(/[&<>"']/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]));
 }
@@ -1846,7 +1824,7 @@ function renderAllAds(){
   renderAdSlot('ad-slot-cat', 0);
 }
 
-/* NAVIGATION & ROUTING */
+/* NAVIGATION */
 function buildNav(){
   const nav = document.getElementById('navList');
   nav.innerHTML = categories.map((c,i)=>{
@@ -1921,7 +1899,7 @@ function loadMoreCategoryItems(){
   renderCategoryGrid();
 }
 
-/* RENDER SITE MAIN */
+/* RENDER MAIN HOMEPAGE */
 function renderSite(){
   if(!siteData) return;
   const arts = siteData.articles || [];
@@ -1992,7 +1970,7 @@ function renderSite(){
   if(currentCat !== 'home') navigateTo(currentCat);
 }
 
-/* MODALS */
+/* MODAL CONTROLLER */
 function showGenericModal(htmlContent){
   document.getElementById('modalContent').innerHTML = htmlContent;
   document.getElementById('articleModal').classList.add('active');
@@ -2115,7 +2093,7 @@ function scrollToTop(){
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-/* EVENTS */
+/* EVENT LISTENERS */
 window.addEventListener('scroll', ()=>{
   const btn = document.getElementById('backToTopBtn');
   if(window.scrollY > 300) btn.classList.add('show');
@@ -2128,7 +2106,7 @@ window.addEventListener('click', event => {
   if(event.target === modal) closeModal();
 });
 
-/* INIT */
+/* INIT APPLICATION */
 updateDate();
 fetchColomboWeather();
 initActiveLanguage();
