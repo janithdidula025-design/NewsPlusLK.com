@@ -1320,6 +1320,16 @@
       .preloader-logo { width: 200px; height: 75px; }
       .preloader-bar-wrap { width: 180px; }
     }
+  
+/* GOOGLE TRANSLATE SAFETY */
+body.translated-ltr,
+body.translated-rtl {
+  top: 0 !important;
+}
+.goog-te-gadget {
+  font-size: 0 !important;
+}
+
   </style>
 </head>
 
@@ -1545,11 +1555,14 @@ function googleTranslateElementInit(){
   new google.translate.TranslateElement({
     pageLanguage:'si',
     includedLanguages:'si,en,ta',
-    autoDisplay:false
+    autoDisplay:false,
+    multilanguagePage:true
   },'google_translate_element');
+
+  setTimeout(applySavedLanguage, 150);
 }
 </script>
-<script src="//https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 <!-- MAIN APPLICATION LOGIC -->
 <script>
@@ -1663,40 +1676,70 @@ function orderNewestFirst(articles){
 }
 
 /* TRANSLATION SYSTEM */
-function translatePage(langCode){
-  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
-  const activeBtn = document.getElementById(`btn-lang-${langCode}`);
-  if(activeBtn) activeBtn.classList.add('active');
+/* =====================================================
+   ROBUST LANGUAGE SWITCHER
+   Sinhala = original page
+   English/Tamil = Google Translate
+   ===================================================== */
+function setGoogleTranslateCookie(langCode){
+  const value = langCode === 'si' ? '' : `/si/${langCode}`;
+  const expires = langCode === 'si'
+    ? 'expires=Thu, 01 Jan 1970 00:00:00 UTC;'
+    : 'max-age=31536000;';
 
-  if(langCode === 'si'){
-    document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-    document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; domain=${window.location.hostname}; path=/;`;
-  } else {
-    const cookieVal = `/si/${langCode}`;
-    document.cookie = `googtrans=${cookieVal}; path=/;`;
-    document.cookie = `googtrans=${cookieVal}; domain=${window.location.hostname}; path=/;`;
+  document.cookie = `googtrans=${value}; ${expires} path=/;`;
+  document.cookie = `googtrans=${value}; ${expires} domain=${window.location.hostname}; path=/;`;
+}
+
+function getCurrentLanguage(){
+  const match = document.cookie.match(/(?:^|;\\s*)googtrans=\/si\/([a-z]{2})/i);
+  return match ? match[1] : 'si';
+}
+
+function markActiveLanguage(langCode){
+  document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+  const active = document.getElementById(`btn-lang-${langCode}`);
+  if(active) active.classList.add('active');
+}
+
+function translatePage(langCode){
+  if(!['si','en','ta'].includes(langCode)) langCode = 'si';
+
+  markActiveLanguage(langCode);
+  setGoogleTranslateCookie(langCode);
+
+  // If Google Translate is already ready, switch immediately.
+  const select = document.querySelector('.goog-te-combo');
+  if(select){
+    select.value = langCode === 'si' ? 'si' : langCode;
+    select.dispatchEvent(new Event('change'));
+    return;
   }
 
-  let attempts = 0;
-  const interval = setInterval(()=>{
-    const select = document.querySelector('.goog-te-combo');
-    if(select){
-      select.value = langCode;
-      select.dispatchEvent(new Event('change'));
-      clearInterval(interval);
-    }
-    attempts++;
-    if(attempts > 20) clearInterval(interval);
-  }, 200);
+  // Otherwise reload so Google Translate reads the cookie from the start.
+  window.location.reload();
 }
 
 function initActiveLanguage(){
-  const match = document.cookie.match(/googtrans=\/si\/([a-z]{2})/);
-  if(match && match[1]){
-    const currentLang = match[1];
-    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
-    const btn = document.getElementById(`btn-lang-${currentLang}`);
-    if(btn) btn.classList.add('active');
+  markActiveLanguage(getCurrentLanguage());
+}
+
+// Keep the language state correct after Google Translate initializes.
+function applySavedLanguage(){
+  const lang = getCurrentLanguage();
+  markActiveLanguage(lang);
+
+  if(lang !== 'si'){
+    let attempts = 0;
+    const timer = setInterval(() => {
+      const select = document.querySelector('.goog-te-combo');
+      if(select){
+        select.value = lang;
+        select.dispatchEvent(new Event('change'));
+        clearInterval(timer);
+      }
+      if(++attempts > 30) clearInterval(timer);
+    }, 250);
   }
 }
 
@@ -1722,6 +1765,8 @@ async function loadData(){
         };
         localStorage.setItem(STORAGE_KEY, JSON.stringify(siteData));
         renderSite();
+        updateHeaderBackgrounds(siteData.articles);
+        applySavedLanguage();
         return;
       }
     }catch(e){
@@ -1737,6 +1782,8 @@ async function loadData(){
     ads: parsed.ads || []
   };
   renderSite();
+  updateHeaderBackgrounds(siteData.articles);
+  applySavedLanguage();
 }
 
 /* UTILITIES */
@@ -2127,8 +2174,8 @@ buildNav();
 updateDate();
 initActiveLanguage();
 fetchColomboWeather();
-initHeaderSlider();
 loadData();
+
 </script>
 
 </body>
