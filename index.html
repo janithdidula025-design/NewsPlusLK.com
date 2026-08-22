@@ -252,7 +252,7 @@
       border-bottom: 2px solid rgba(215, 25, 32, 0.2);
       padding: 35px 5%;
       overflow: hidden;
-      background: #071325;
+      background: #ffffff;
     }
 
     /* Soft news image slideshow overlay */
@@ -273,14 +273,14 @@
     }
 
     .bg-slide.active {
-      opacity: 0.18; /* photo overlay */
+      opacity: 0.5;
       transform: scale(1.05);
     }
 
     .header-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(135deg, rgba(7, 19, 37, 0.92) 0%, rgba(11, 31, 58, 0.85) 100%);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.88) 0%, rgba(248, 250, 252, 0.82) 100%);
       z-index: 2;
     }
 
@@ -313,8 +313,8 @@
       background: #ffffff;
       padding: 12px 24px;
       border-radius: 20px;
-      border: 2px solid rgba(255, 255, 255, 0.2);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+      border: 2px solid var(--border);
+      box-shadow: 0 10px 30px rgba(15,23,42,0.12);
     }
 
     .site-logo:hover {
@@ -326,22 +326,21 @@
       flex-direction: column;
       justify-content: center;
       text-align: center;
-      color: #ffffff;
+      color: var(--navy);
     }
 
     .header-center-info .eyebrow {
       font-size: 14px;
       letter-spacing: 3px;
       font-weight: 800;
-      color: #ff4d52;
+      color: var(--primary);
       text-transform: uppercase;
       margin-bottom: 6px;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.5);
     }
 
     .header-center-info .tagline {
       font-size: 15px;
-      color: #e2e8f0;
+      color: var(--text-2);
       font-weight: 600;
       letter-spacing: 0.5px;
     }
@@ -356,16 +355,16 @@
     .header-search input {
       width: 100%;
       height: 48px;
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      border: 1px solid var(--border);
       border-right: none;
       outline: none;
       padding: 0 20px;
-      background: rgba(255, 255, 255, 0.95);
+      background: #ffffff;
       color: var(--text);
       border-radius: 25px 0 0 25px;
       font-size: 14px;
       transition: .25s ease;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+      box-shadow: 0 4px 15px rgba(15,23,42,0.08);
     }
 
     .header-search input:focus {
