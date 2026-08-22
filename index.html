@@ -1373,10 +1373,10 @@
 <header class="site-header">
   <!-- Dynamic Event/News Photo Slideshow Overlay (Low Opacity) -->
   <div class="header-bg-slider" id="headerBgSlider">
-    <div class="bg-slide active" style="background-image: url('https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=1600&q=80');"></div>
-    <div class="bg-slide" style="background-image: url('https://images.unsplash.com/photo-1585829365295-ab7cd400c167?auto=format&fit=crop&w=1600&q=80');"></div>
-    <div class="bg-slide" style="background-image: url('https://images.unsplash.com/photo-1495020689067-958852a7765e?auto=format&fit=crop&w=1600&q=80');"></div>
-    <div class="bg-slide" style="background-image: url('https://images.unsplash.com/photo-1526470608268-f674ce90ebd4?auto=format&fit=crop&w=1600&q=80');"></div>
+    <div class="bg-slide active" style="background-image: url('https://images.unsplash.com/photo-1623595289196-007a22dd8560?auto=format&fit=crop&w=1600&q=80');"></div>
+    <div class="bg-slide" style="background-image: url('https://images.unsplash.com/photo-1740812517101-fee71e001ebc?auto=format&fit=crop&w=1600&q=80');"></div>
+    <div class="bg-slide" style="background-image: url('https://images.unsplash.com/photo-1594041516427-9463d30b67b3?auto=format&fit=crop&w=1600&q=80');"></div>
+    <div class="bg-slide" style="background-image: url('https://images.unsplash.com/photo-1653478673261-4937126eb512?auto=format&fit=crop&w=1600&q=80');"></div>
   </div>
 
   <div class="header-overlay"></div>
@@ -1590,10 +1590,10 @@ function updateHeaderBackgrounds(articles){
   const slider = document.getElementById('headerBgSlider');
   if(!slider) return;
   const fallback = [
-    'https://images.unsplash.com/photo-1586861635167-e5223aadc9fe?auto=format&fit=crop&w=1800&q=82',
-    'https://images.unsplash.com/photo-1546708973-b339540b5162?auto=format&fit=crop&w=1800&q=82',
-    'https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?auto=format&fit=crop&w=1800&q=82',
-    'https://images.unsplash.com/photo-1578564499878-4360a0f5d72f?auto=format&fit=crop&w=1800&q=82'
+    'https://images.unsplash.com/photo-1623595289196-007a22dd8560?auto=format&fit=crop&w=1800&q=82',
+    'https://images.unsplash.com/photo-1740812517101-fee71e001ebc?auto=format&fit=crop&w=1800&q=82',
+    'https://images.unsplash.com/photo-1594041516427-9463d30b67b3?auto=format&fit=crop&w=1800&q=82',
+    'https://images.unsplash.com/photo-1653478673261-4937126eb512?auto=format&fit=crop&w=1800&q=82'
   ];
   const articleImages = (articles || []).map(getArticleImage).filter(Boolean).slice(0,4);
   const urls = articleImages.length ? articleImages : fallback;
