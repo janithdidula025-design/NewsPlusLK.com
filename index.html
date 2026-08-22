@@ -273,7 +273,7 @@
     }
 
     .bg-slide.active {
-      opacity: 0.18; /* Lawata pennana photo overlay */
+      opacity: 0.18; /* photo overlay */
       transform: scale(1.05);
     }
 
@@ -1320,15 +1320,15 @@
       .preloader-logo { width: 200px; height: 75px; }
       .preloader-bar-wrap { width: 180px; }
     }
-  
-/* GOOGLE TRANSLATE SAFETY */
-body.translated-ltr,
-body.translated-rtl {
-  top: 0 !important;
-}
-.goog-te-gadget {
-  font-size: 0 !important;
-}
+
+    /* GOOGLE TRANSLATE SAFETY */
+    body.translated-ltr,
+    body.translated-rtl {
+      top: 0 !important;
+    }
+    .goog-te-gadget {
+      font-size: 0 !important;
+    }
 
   </style>
 </head>
@@ -1371,7 +1371,7 @@ body.translated-rtl {
 
 <!-- HEADER (PERFECTLY ALIGNED & ENHANCED) -->
 <header class="site-header">
-  <!-- Dynamic Dynamic Event/News Photo Slideshow Overlay (Low Opacity) -->
+  <!-- Dynamic Event/News Photo Slideshow Overlay (Low Opacity) -->
   <div class="header-bg-slider" id="headerBgSlider">
     <div class="bg-slide active" style="background-image: url('https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=1600&q=80');"></div>
     <div class="bg-slide" style="background-image: url('https://images.unsplash.com/photo-1585829365295-ab7cd400c167?auto=format&fit=crop&w=1600&q=80');"></div>
@@ -1692,7 +1692,7 @@ function setGoogleTranslateCookie(langCode){
 }
 
 function getCurrentLanguage(){
-  const match = document.cookie.match(/(?:^|;\\s*)googtrans=\/si\/([a-z]{2})/i);
+  const match = document.cookie.match(/(?:^|;\s*)googtrans=\/si\/([a-z]{2})/i);
   return match ? match[1] : 'si';
 }
 
