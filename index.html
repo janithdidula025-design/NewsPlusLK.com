@@ -245,17 +245,16 @@
     }
 
     /* =====================================================
-       HEADER (UPDATED LAYOUT & BIG LOGO & BACKGROUND SLIDER)
+       NEW LOGO & HEADER DESIGN
        ===================================================== */
     .site-header {
       position: relative;
       border-bottom: 2px solid rgba(215, 25, 32, 0.2);
-      padding: 35px 5%;
+      padding: 30px 5%;
       overflow: hidden;
       background: #ffffff;
     }
 
-    /* Soft news image slideshow overlay */
     .header-bg-slider {
       position: absolute;
       inset: 0;
@@ -280,7 +279,7 @@
     .header-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.88) 0%, rgba(248, 250, 252, 0.82) 100%);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(248, 250, 252, 0.84) 100%);
       z-index: 2;
     }
 
@@ -292,33 +291,35 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 30px;
+      gap: 25px;
     }
 
-    .logo-link {
-      display: flex;
+    /* Brand-New Unique Logo Frame */
+    .brand-logo-card {
+      display: inline-flex;
       align-items: center;
       text-decoration: none;
+      padding: 3px;
+      border-radius: 22px;
+      background: linear-gradient(135deg, #d71920 0%, #0b1f3a 100%);
+      box-shadow: 0 10px 25px rgba(215, 25, 32, 0.2);
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
       flex-shrink: 0;
     }
 
-    /* Bigger, Prominent Logo Box */
-    .site-logo {
-      width: 440px;
-      height: 145px;
-      object-fit: contain;
-      display: block;
-      filter: drop-shadow(0 8px 20px rgba(0,0,0,0.3));
-      transition: transform .3s ease;
-      background: #ffffff;
-      padding: 12px 24px;
-      border-radius: 20px;
-      border: 2px solid var(--border);
-      box-shadow: 0 10px 30px rgba(15,23,42,0.12);
+    .brand-logo-card:hover {
+      transform: translateY(-4px) scale(1.01);
+      box-shadow: 0 16px 35px rgba(215, 25, 32, 0.35);
     }
 
-    .site-logo:hover {
-      transform: translateY(-3px) scale(1.02);
+    .site-logo {
+      width: 400px;
+      height: 125px;
+      object-fit: contain;
+      display: block;
+      background: #ffffff;
+      padding: 10px 24px;
+      border-radius: 19px;
     }
 
     .header-center-info {
@@ -330,16 +331,16 @@
     }
 
     .header-center-info .eyebrow {
-      font-size: 14px;
+      font-size: 13px;
       letter-spacing: 3px;
       font-weight: 800;
       color: var(--primary);
       text-transform: uppercase;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
     }
 
     .header-center-info .tagline {
-      font-size: 15px;
+      font-size: 14.5px;
       color: var(--text-2);
       font-weight: 600;
       letter-spacing: 0.5px;
@@ -348,23 +349,23 @@
     .header-search {
       display: flex;
       align-items: center;
-      width: 340px;
+      width: 320px;
       flex-shrink: 0;
     }
 
     .header-search input {
       width: 100%;
-      height: 48px;
+      height: 46px;
       border: 1px solid var(--border);
       border-right: none;
       outline: none;
-      padding: 0 20px;
+      padding: 0 18px;
       background: #ffffff;
       color: var(--text);
       border-radius: 25px 0 0 25px;
-      font-size: 14px;
+      font-size: 13.5px;
       transition: .25s ease;
-      box-shadow: 0 4px 15px rgba(15,23,42,0.08);
+      box-shadow: 0 4px 15px rgba(15,23,42,0.06);
     }
 
     .header-search input:focus {
@@ -373,16 +374,16 @@
     }
 
     .header-search button {
-      height: 48px;
-      width: 60px;
+      height: 46px;
+      width: 55px;
       border: none;
       background: var(--gradient);
       color: #fff;
       border-radius: 0 25px 25px 0;
       cursor: pointer;
-      font-size: 18px;
+      font-size: 17px;
       transition: .25s ease;
-      box-shadow: 0 4px 15px rgba(215,25,32,0.3);
+      box-shadow: 0 4px 15px rgba(215,25,32,0.25);
     }
 
     .header-search button:hover {
@@ -977,7 +978,7 @@
       font-size: 13px;
     }
 
-    /* MODAL */
+    /* MODAL & POPUP STYLES */
     .modal {
       position: fixed;
       inset: 0;
@@ -986,7 +987,7 @@
       align-items: center;
       justify-content: center;
       padding: 18px;
-      background: rgba(15,23,42,.55);
+      background: rgba(15,23,42,.65);
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
     }
@@ -997,15 +998,15 @@
 
     .modal-box {
       width: 100%;
-      max-width: 760px;
-      max-height: 88vh;
+      max-width: 800px;
+      max-height: 90vh;
       overflow-y: auto;
       position: relative;
       background: #fff;
       border: 1px solid var(--border);
       border-radius: var(--radius-xl);
-      padding: 25px;
-      box-shadow: 0 25px 70px rgba(15,23,42,.25);
+      padding: 26px;
+      box-shadow: 0 25px 70px rgba(15,23,42,.3);
       animation: modalIn .3s ease;
     }
 
@@ -1016,17 +1017,20 @@
 
     .modal-close {
       position: absolute;
-      right: 13px;
-      top: 13px;
-      width: 36px;
-      height: 36px;
+      right: 15px;
+      top: 15px;
+      width: 38px;
+      height: 38px;
       border: none;
       border-radius: 50%;
       background: #f1f3f6;
       color: var(--text-2);
       cursor: pointer;
-      font-size: 21px;
-      z-index: 5;
+      font-size: 20px;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       transition: .2s ease;
     }
 
@@ -1037,7 +1041,7 @@
 
     .modal-box > img {
       width: 100%;
-      max-height: 400px;
+      max-height: 420px;
       object-fit: cover;
       border-radius: var(--radius-md);
       margin-bottom: 16px;
@@ -1060,6 +1064,120 @@
       width: 100%;
       height: 100%;
       border: none;
+    }
+
+    /* POPUP SHARE BAR STYLING */
+    .modal-share-bar {
+      margin: 22px 0;
+      padding: 15px 18px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .modal-share-title {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--navy);
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .share-buttons-group {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .share-btn {
+      padding: 7px 15px;
+      border-radius: 20px;
+      border: none;
+      color: #ffffff;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    .share-btn:hover {
+      transform: translateY(-2px);
+      opacity: 0.92;
+    }
+
+    .share-btn.fb { background: #1877F2; }
+    .share-btn.wa { background: #25D366; }
+    .share-btn.tw { background: #000000; }
+    .share-btn.copy { background: #475569; }
+
+    /* POPUP RELATED OTHER NEWS SECTION */
+    .modal-related-section {
+      margin-top: 25px;
+      padding-top: 20px;
+      border-top: 2px dashed var(--border);
+    }
+
+    .modal-related-title {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .modal-related-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .modal-related-card {
+      display: flex;
+      gap: 10px;
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 10px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .modal-related-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--primary);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+    }
+
+    .modal-related-card img, .modal-related-card .ph {
+      width: 70px;
+      height: 70px;
+      object-fit: cover;
+      border-radius: var(--radius-sm);
+      flex-shrink: 0;
+      background: #eef2f7;
+    }
+
+    .modal-related-card h4 {
+      font-size: 12px;
+      line-height: 1.45;
+      font-weight: 700;
+      color: var(--text);
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
 
     /* GALLERY */
@@ -1282,13 +1400,14 @@
       .hero-grid { grid-template-columns: 1fr; }
       .hero-main .img-wrapper, .hero-main img, .hero-main .ph { height: 330px; }
       .card-grid { grid-template-columns: repeat(2,1fr); }
+      .modal-related-grid { grid-template-columns: 1fr; }
     }
 
     @media(max-width:700px){
       .utility-bar { justify-content: center; text-align: center; }
       .utility-left { justify-content: center; }
       .site-header { padding: 25px 15px; }
-      .site-logo { width: 300px; height: 105px; padding: 8px 16px; border-radius: 14px; }
+      .site-logo { width: 290px; height: 95px; padding: 6px 14px; }
       .header-center-info .eyebrow { font-size: 12px; }
       .header-center-info .tagline { font-size: 13px; }
       .header-search { width: 100%; }
@@ -1312,7 +1431,7 @@
     }
 
     @media(max-width:430px){
-      .site-logo { width: 250px; height: 90px; }
+      .site-logo { width: 240px; height: 80px; }
       .header-search input { font-size: 12px; }
       .hero-main h2 { font-size: 18px; }
       .section-title { font-size: 17px; }
@@ -1320,7 +1439,6 @@
       .preloader-bar-wrap { width: 180px; }
     }
 
-    /* GOOGLE TRANSLATE SAFETY */
     body.translated-ltr,
     body.translated-rtl {
       top: 0 !important;
@@ -1328,7 +1446,6 @@
     .goog-te-gadget {
       font-size: 0 !important;
     }
-
   </style>
 </head>
 
@@ -1368,9 +1485,8 @@
   </div>
 </div>
 
-<!-- HEADER (PERFECTLY ALIGNED & ENHANCED) -->
+<!-- HEADER (REDESIGNED BRAND LOGO FRAME) -->
 <header class="site-header">
-  <!-- Dynamic Event/News Photo Slideshow Overlay (Low Opacity) -->
   <div class="header-bg-slider" id="headerBgSlider">
     <div class="bg-slide active" style="background-image: url('https://images.unsplash.com/photo-1623595289196-007a22dd8560?auto=format&fit=crop&w=1600&q=80');"></div>
     <div class="bg-slide" style="background-image: url('https://images.unsplash.com/photo-1740812517101-fee71e001ebc?auto=format&fit=crop&w=1600&q=80');"></div>
@@ -1381,8 +1497,8 @@
   <div class="header-overlay"></div>
 
   <div class="header-inner">
-    <!-- Big Prominent Logo -->
-    <a href="#" class="logo-link" onclick="navigateTo('home');return false;">
+    <!-- Redesigned Logo Card Container -->
+    <a href="#" class="brand-logo-card" onclick="navigateTo('home');return false;">
       <img src="https://raw.githubusercontent.com/janithdidula025-design/NewsPlusLK.com/545d4d6e03713055fca4fc7a4e33bc015e30b3fe/logo.jpeg" alt="NewsPlusLK Logo" class="site-logo">
     </a>
 
@@ -1477,7 +1593,7 @@
 
 </div>
 
-<!-- ARTICLE & GENERAL MODAL -->
+<!-- ARTICLE & GENERAL MODAL WITH SHARE & RELATED NEWS -->
 <div class="modal" id="articleModal">
   <div class="modal-box">
     <button class="modal-close" onclick="closeModal()">&times;</button>
@@ -1584,7 +1700,7 @@ function dismissPreloader(){
 }
 setTimeout(dismissPreloader, 1000);
 
-/* HEADER BACKGROUND — USE REAL NEWS PHOTOS, WITH SRI LANKA FALLBACKS */
+/* HEADER BACKGROUND SLIDER */
 function updateHeaderBackgrounds(articles){
   const slider = document.getElementById('headerBgSlider');
   if(!slider) return;
@@ -1600,7 +1716,6 @@ function updateHeaderBackgrounds(articles){
   initHeaderSlider();
 }
 
-/* HEADER SLIDER (PHOTOS CHANGE SOFTLY IN BACKGROUND) */
 function initHeaderSlider(){
   const slides = document.querySelectorAll('.header-bg-slider .bg-slide');
   if(!slides.length) return;
@@ -1675,11 +1790,6 @@ function orderNewestFirst(articles){
 }
 
 /* TRANSLATION SYSTEM */
-/* =====================================================
-   ROBUST LANGUAGE SWITCHER
-   Sinhala = original page
-   English/Tamil = Google Translate
-   ===================================================== */
 function setGoogleTranslateCookie(langCode){
   const value = langCode === 'si' ? '' : `/si/${langCode}`;
   const expires = langCode === 'si'
@@ -1707,7 +1817,6 @@ function translatePage(langCode){
   markActiveLanguage(langCode);
   setGoogleTranslateCookie(langCode);
 
-  // If Google Translate is already ready, switch immediately.
   const select = document.querySelector('.goog-te-combo');
   if(select){
     select.value = langCode === 'si' ? 'si' : langCode;
@@ -1715,7 +1824,6 @@ function translatePage(langCode){
     return;
   }
 
-  // Otherwise reload so Google Translate reads the cookie from the start.
   window.location.reload();
 }
 
@@ -1723,7 +1831,6 @@ function initActiveLanguage(){
   markActiveLanguage(getCurrentLanguage());
 }
 
-// Keep the language state correct after Google Translate initializes.
 function applySavedLanguage(){
   const lang = getCurrentLanguage();
   markActiveLanguage(lang);
@@ -2040,11 +2147,19 @@ function renderSite(){
   if(currentCat !== 'home') navigateTo(currentCat);
 }
 
-/* MODAL CONTROLLER */
+/* MODAL CONTROLLER & SHARE + OTHER NEWS LOADING LOGIC */
 function showGenericModal(htmlContent){
   document.getElementById('modalContent').innerHTML = htmlContent;
   document.getElementById('articleModal').classList.add('active');
   document.body.style.overflow = 'hidden';
+}
+
+function copyArticleLink(url){
+  navigator.clipboard.writeText(url).then(() => {
+    alert('පුවතේ direct link එක සාර්ථකව copy කරගන්නා ලදී!');
+  }).catch(() => {
+    alert('ලින්ක් එක copy කිරීමට නොහැකි විය.');
+  });
 }
 
 function openModal(id){
@@ -2053,6 +2168,56 @@ function openModal(id){
 
   const ytEmbed = getYouTubeEmbedUrl(getArticleYouTubeLink(a));
   const imgSrc = getArticleImage(a);
+  const currentUrl = window.location.href;
+  const shareText = encodeURIComponent(a.title);
+
+  /* LOAD OTHER NEWS BELOW THIS ARTICLE */
+  const otherArticles = (siteData.articles || []).filter(x => String(x.id) !== String(id)).slice(0, 4);
+
+  let relatedHtml = '';
+  if(otherArticles.length > 0){
+    relatedHtml = `
+      <div class="modal-related-section">
+        <div class="modal-related-title">
+          <i class="fa-solid fa-layer-group" style="color:var(--primary);"></i> වෙනත් නවතම පුවත්
+        </div>
+        <div class="modal-related-grid">
+          ${otherArticles.map(item => `
+            <div class="modal-related-card" onclick="openModal('${esc(item.id)}')">
+              ${renderImageHtml(item, 'modal-rel-img')}
+              <div>
+                <h4>${esc(item.title)}</h4>
+                ${item.time ? `<span style="font-size:10.5px;color:var(--muted);display:block;margin-top:4px;">🕒 ${esc(item.time)}</span>` : ''}
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `;
+  }
+
+  /* POPUP SHARE SECTION */
+  const shareHtml = `
+    <div class="modal-share-bar">
+      <div class="modal-share-title">
+        <i class="fa-solid fa-share-nodes" style="color:var(--primary);"></i> මෙම පුවත බෙදාගන්න:
+      </div>
+      <div class="share-buttons-group">
+        <a href="https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentUrl)}" target="_blank" rel="noopener" class="share-btn fb">
+          <i class="fa-brands fa-facebook-f"></i> Facebook
+        </a>
+        <a href="https://api.whatsapp.com/send?text=${shareText}%20${encodeURIComponent(currentUrl)}" target="_blank" rel="noopener" class="share-btn wa">
+          <i class="fa-brands fa-whatsapp"></i> WhatsApp
+        </a>
+        <a href="https://twitter.com/intent/tweet?text=${shareText}&url=${encodeURIComponent(currentUrl)}" target="_blank" rel="noopener" class="share-btn tw">
+          <i class="fa-brands fa-x-twitter"></i> X
+        </a>
+        <button onclick="copyArticleLink('${esc(currentUrl)}')" class="share-btn copy">
+          <i class="fa-solid fa-link"></i> Link Copy
+        </button>
+      </div>
+    </div>
+  `;
 
   const content = `
     ${ytEmbed ? `<div class="video-wrapper"><iframe src="${ytEmbed}" title="${esc(a.title)}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>` : (imgSrc ? `<img src="${esc(imgSrc)}" alt="${esc(a.title)}">` : '')}
@@ -2062,6 +2227,8 @@ function openModal(id){
     </div>
     <h2 style="font-size:clamp(19px,4vw,27px);color:var(--text);font-weight:800;line-height:1.4;">${esc(a.title)}</h2>
     <div style="margin-top:16px;font-size:14px;color:var(--text-2);line-height:1.9;white-space:pre-line;">${esc(a.desc)}</div>
+    ${shareHtml}
+    ${relatedHtml}
   `;
   showGenericModal(content);
 }
