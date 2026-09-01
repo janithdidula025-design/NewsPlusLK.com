@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#d71920">
+  <meta name="theme-color" content="#e11d2a">
   <meta name="description" content="NewsPlusLK — ශ්‍රී ලංකාවේ නවතම පුවත් එසැනින් හා විශ්වාසනීයව">
 
   <title>NewsPlusLK — එසැනින් විශ්වාසනීය පුවත්</title>
@@ -25,23 +25,25 @@
     :root {
       --bg: #f4f7fb;
       --surface: #ffffff;
-      --surface-2: #f8fafc;
-      --primary: #d71920;
-      --primary-dark: #b51218;
-      --navy: #0b1f3a;
-      --text: #111827;
-      --text-2: #374151;
+      --surface-2: #f7f8fc;
+      --primary: #e11d2a;
+      --primary-dark: #a9101c;
+      --accent: #f5a524;
+      --navy: #0a1830;
+      --text: #14181f;
+      --text-2: #3d4552;
       --muted: #6b7280;
-      --border: #e5e7eb;
-      --border-dark: #d1d5db;
-      --red-light: #fff1f2;
-      --radius-xl: 22px;
-      --radius-lg: 18px;
-      --radius-md: 14px;
-      --radius-sm: 9px;
-      --shadow: 0 8px 30px rgba(15,23,42,.07);
-      --shadow-hover: 0 18px 45px rgba(15,23,42,.12);
-      --gradient: linear-gradient(135deg, #d71920 0%, #b51218 100%);
+      --border: #e7e9f0;
+      --border-dark: #d3d7e2;
+      --red-light: #fff0f1;
+      --radius-xl: 26px;
+      --radius-lg: 20px;
+      --radius-md: 15px;
+      --radius-sm: 10px;
+      --shadow: 0 10px 32px rgba(10,24,48,.08);
+      --shadow-hover: 0 22px 48px rgba(10,24,48,.14);
+      --gradient: linear-gradient(135deg, #e11d2a 0%, #a9101c 100%);
+      --gradient-navy: linear-gradient(135deg, #14264a 0%, #0a1830 100%);
     }
 
     /* =====================================================
@@ -59,8 +61,9 @@
 
     body {
       font-family: 'Plus Jakarta Sans', 'Noto Sans Sinhala', Arial, sans-serif;
-      background: radial-gradient(circle at 0% 0%, rgba(215,25,32,.045), transparent 35%),
-                  linear-gradient(180deg, #f8fafc 0%, #f3f6fa 100%);
+      background: radial-gradient(circle at 0% 0%, rgba(225,29,42,.05), transparent 35%),
+                  radial-gradient(circle at 100% 0%, rgba(245,165,36,.05), transparent 40%),
+                  linear-gradient(180deg, #f8f9fd 0%, #f2f4f9 100%);
       color: var(--text);
       line-height: 1.6;
       overflow-x: hidden;
@@ -107,7 +110,7 @@
       background: #ffffff;
       padding: 16px 28px;
       border-radius: 20px;
-      box-shadow: 0 0 45px rgba(215, 25, 32, 0.45);
+      box-shadow: 0 0 45px rgba(225, 29, 42, 0.45);
       animation: logoGlowPulse 1.5s infinite ease-in-out;
     }
 
@@ -144,8 +147,8 @@
     }
 
     @keyframes logoGlowPulse {
-      0%, 100% { transform: scale(1); box-shadow: 0 0 30px rgba(215, 25, 32, 0.35); }
-      50% { transform: scale(1.04); box-shadow: 0 0 55px rgba(215, 25, 32, 0.7); }
+      0%, 100% { transform: scale(1); box-shadow: 0 0 30px rgba(225, 29, 42, 0.35); }
+      50% { transform: scale(1.04); box-shadow: 0 0 55px rgba(225, 29, 42, 0.7); }
     }
 
     @keyframes barAnimation {
@@ -241,7 +244,7 @@
       background: var(--gradient);
       color: #fff;
       border-color: transparent;
-      box-shadow: 0 5px 15px rgba(215,25,32,.18);
+      box-shadow: 0 5px 15px rgba(225,29,42,.18);
     }
 
     /* =====================================================
@@ -249,7 +252,7 @@
        ===================================================== */
     .site-header {
       position: relative;
-      border-bottom: 2px solid rgba(215, 25, 32, 0.2);
+      border-bottom: 2px solid rgba(225, 29, 42, 0.2);
       padding: 30px 5%;
       overflow: hidden;
       background: #ffffff;
@@ -301,15 +304,15 @@
       text-decoration: none;
       padding: 3px;
       border-radius: 22px;
-      background: linear-gradient(135deg, #d71920 0%, #0b1f3a 100%);
-      box-shadow: 0 10px 25px rgba(215, 25, 32, 0.2);
+      background: linear-gradient(135deg, #e11d2a 0%, #0a1830 100%);
+      box-shadow: 0 10px 25px rgba(225, 29, 42, 0.2);
       transition: transform 0.35s ease, box-shadow 0.35s ease;
       flex-shrink: 0;
     }
 
     .brand-logo-card:hover {
       transform: translateY(-4px) scale(1.01);
-      box-shadow: 0 16px 35px rgba(215, 25, 32, 0.35);
+      box-shadow: 0 16px 35px rgba(225, 29, 42, 0.35);
     }
 
     .site-logo {
@@ -383,7 +386,7 @@
       cursor: pointer;
       font-size: 17px;
       transition: .25s ease;
-      box-shadow: 0 4px 15px rgba(215,25,32,0.25);
+      box-shadow: 0 4px 15px rgba(225,29,42,0.25);
     }
 
     .header-search button:hover {
@@ -391,27 +394,24 @@
     }
 
     /* =====================================================
-       NAVIGATION
+       NAVIGATION (NEW LAYOUT — DARK UNDERLINE TABS)
        ===================================================== */
     nav {
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(255,255,255,.95);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--border);
-      box-shadow: 0 3px 15px rgba(15,23,42,.04);
+      background: var(--navy);
+      box-shadow: 0 6px 20px rgba(11,31,58,.28);
     }
 
     nav ul {
       max-width: 1280px;
       margin: auto;
-      padding: 7px 18px;
+      padding: 0 18px;
       display: flex;
       justify-content: center;
-      align-items: center;
-      gap: 5px;
+      align-items: stretch;
+      gap: 2px;
       list-style: none;
       overflow-x: auto;
       scrollbar-width: none;
@@ -421,28 +421,58 @@
       display: none;
     }
 
+    nav li {
+      flex-shrink: 0;
+    }
+
     nav li a {
-      display: block;
-      padding: 9px 18px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 16px 20px;
       text-decoration: none;
       white-space: nowrap;
-      border-radius: 24px;
-      color: var(--text-2);
+      color: rgba(255,255,255,.68);
       font-size: 13px;
       font-weight: 700;
       cursor: pointer;
-      transition: .25s ease;
+      transition: color .25s ease;
+    }
+
+    nav li a i {
+      font-size: 12px;
+      opacity: .85;
+    }
+
+    nav li a::after {
+      content: '';
+      position: absolute;
+      left: 20px;
+      right: 20px;
+      bottom: 0;
+      height: 3px;
+      border-radius: 3px 3px 0 0;
+      background: var(--primary);
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: transform .25s ease;
     }
 
     nav li a:hover {
-      color: var(--primary);
-      background: var(--red-light);
+      color: #fff;
+    }
+
+    nav li a:hover::after {
+      transform: scaleX(.45);
     }
 
     nav li.active a {
-      background: var(--gradient);
       color: #fff;
-      box-shadow: 0 5px 15px rgba(215,25,32,.18);
+    }
+
+    nav li.active a::after {
+      transform: scaleX(1);
     }
 
     /* =====================================================
@@ -470,7 +500,7 @@
       letter-spacing: .7px;
       white-space: nowrap;
       z-index: 2;
-      box-shadow: 5px 0 15px rgba(215,25,32,.08);
+      box-shadow: 5px 0 15px rgba(225,29,42,.08);
     }
 
     .ticker-track {
@@ -509,8 +539,8 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 20px;
-      padding-bottom: 12px;
+      margin-bottom: 22px;
+      padding-bottom: 14px;
       border-bottom: 2px solid var(--border);
       position: relative;
     }
@@ -522,7 +552,7 @@
       bottom: -2px;
       width: 70px;
       height: 2px;
-      background: var(--primary);
+      background: var(--accent);
     }
 
     .section-title-wrapper {
@@ -532,22 +562,22 @@
     }
 
     .section-badge-pill {
-      background: var(--gradient);
+      background: var(--gradient-navy);
       color: #ffffff;
       font-size: 11px;
       font-weight: 800;
-      padding: 4px 12px;
+      padding: 5px 13px;
       border-radius: 20px;
       letter-spacing: 0.5px;
       text-transform: uppercase;
-      box-shadow: 0 3px 10px rgba(215,25,32,.2);
+      box-shadow: 0 3px 10px rgba(10,24,48,.22);
     }
 
     .section-title {
       display: flex;
       align-items: center;
       gap: 10px;
-      font-size: 20px;
+      font-size: 21px;
       font-weight: 800;
       color: var(--navy);
       margin: 0;
@@ -565,7 +595,7 @@
       background: #ffffff;
       border: 1px solid var(--border);
       border-radius: var(--radius-xl);
-      padding: 24px;
+      padding: 26px;
       margin-bottom: 35px;
       box-shadow: var(--shadow);
     }
@@ -627,10 +657,20 @@
       cursor: pointer;
       box-shadow: var(--shadow);
       transition: .35s ease;
+      position: relative;
+    }
+
+    .hero-main::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      z-index: 3;
     }
 
     .hero-main:hover {
-      transform: translateY(-5px);
+      transform: translateY(-6px);
       box-shadow: var(--shadow-hover);
       border-color: #d9dde4;
     }
@@ -768,11 +808,11 @@
       width: 48px;
       height: 48px;
       border-radius: 50%;
-      background: rgba(215,25,32,.94);
+      background: rgba(225,29,42,.94);
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 5px 20px rgba(215,25,32,.3);
+      box-shadow: 0 5px 20px rgba(225,29,42,.3);
       pointer-events: none;
     }
 
@@ -808,7 +848,7 @@
       background: var(--surface-2);
       border: 1px solid var(--border);
       border-radius: var(--radius-lg);
-      padding: 20px;
+      padding: 22px;
     }
 
     .strip-title {
@@ -818,9 +858,9 @@
       color: var(--primary);
       font-size: 15px;
       font-weight: 800;
-      padding-bottom: 11px;
+      padding-bottom: 12px;
       margin-bottom: 4px;
-      border-bottom: 1px solid var(--border);
+      border-bottom: 2px solid var(--accent);
     }
 
     .strip-row {
@@ -864,7 +904,7 @@
       color: var(--primary);
     }
 
-    /* CARDS GRID */
+    /* CARDS GRID — REDESIGNED LAYOUT (overlay badges on image) */
     .card-grid {
       display: grid;
       grid-template-columns: repeat(3,1fr);
@@ -886,7 +926,7 @@
     }
 
     .card:hover {
-      transform: translateY(-5px);
+      transform: translateY(-6px);
       box-shadow: var(--shadow-hover);
       border-color: #d6dae1;
     }
@@ -899,28 +939,66 @@
       background: #eef2f7;
     }
 
-    .card .img-wrapper {
+    .card-media {
+      position: relative;
       width: 100%;
       height: 200px;
+      overflow: hidden;
+      background: #eef2f7;
     }
 
-    .card .img-wrapper img, .card .img-wrapper .ph {
+    .card-media img,
+    .card-media .ph,
+    .card-media .img-wrapper,
+    .card-media .img-wrapper img,
+    .card-media .img-wrapper .ph {
       width: 100%;
       height: 200px;
       object-fit: cover;
       display: block;
     }
 
+    .card-media::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0) 55%, rgba(0,0,0,.55) 100%);
+      pointer-events: none;
+    }
+
     .card .meta-bar {
+      position: absolute;
+      left: 12px;
+      right: 12px;
+      bottom: 10px;
+      z-index: 2;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 10px;
-      padding: 14px 16px 0;
+      padding: 0;
+    }
+
+    .card .meta-bar .kicker {
+      background: var(--gradient);
+      color: #fff;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 9.5px;
+      box-shadow: 0 3px 10px rgba(0,0,0,.2);
+    }
+
+    .card .meta-bar .time-badge {
+      color: #fff;
+      background: rgba(0,0,0,.4);
+      padding: 3px 9px;
+      border-radius: 20px;
+      font-size: 10px;
+      backdrop-filter: blur(3px);
     }
 
     .card h3 {
-      padding: 7px 16px 8px;
+      padding: 14px 16px 8px;
       color: var(--text);
       font-size: 15px;
       line-height: 1.5;
@@ -939,17 +1017,67 @@
       line-height: 1.7;
     }
 
+    /* SKELETON LOADING (shown while news is being fetched) */
+    .skeleton-shimmer {
+      background: linear-gradient(90deg, #eef1f5 25%, #f7f9fc 37%, #eef1f5 63%);
+      background-size: 400% 100%;
+      animation: skeletonWave 1.4s ease-in-out infinite;
+    }
+
+    @keyframes skeletonWave {
+      0% { background-position: 100% 50%; }
+      100% { background-position: 0 50%; }
+    }
+
+    .sk-hero-main {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .sk-hero-main .sk-img { height: 390px; width: 100%; }
+    .sk-hero-main .sk-line { height: 14px; margin: 16px 22px; border-radius: 8px; }
+    .sk-hero-main .sk-line.w60 { width: 60%; }
+    .sk-hero-main .sk-line.w90 { width: 90%; }
+
+    .sk-side-item {
+      min-height: 103px;
+      padding: 11px;
+      display: flex;
+      gap: 13px;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+    }
+
+    .sk-side-item .sk-thumb { width: 90px; height: 90px; border-radius: var(--radius-sm); flex-shrink: 0; }
+    .sk-side-item .sk-lines { flex: 1; padding-top: 6px; }
+    .sk-side-item .sk-line { height: 11px; margin-bottom: 9px; border-radius: 6px; }
+    .sk-side-item .sk-line.w70 { width: 70%; }
+    .sk-side-item .sk-line.w40 { width: 40%; }
+
+    .sk-strip-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 13px 6px;
+    }
+
+    .sk-strip-row .sk-line { height: 11px; flex: 1; border-radius: 6px; }
+
     /* BUTTONS */
     .back-btn, .load-more-btn {
       border: none;
       background: var(--gradient);
       color: #fff;
-      padding: 11px 22px;
+      padding: 12px 24px;
       border-radius: 30px;
       cursor: pointer;
       font-size: 13px;
       font-weight: 700;
-      box-shadow: 0 7px 20px rgba(215,25,32,.18);
+      box-shadow: 0 8px 22px rgba(225,29,42,.2);
       transition: .3s ease;
     }
 
@@ -959,7 +1087,7 @@
 
     .back-btn:hover, .load-more-btn:hover {
       transform: translateY(-3px);
-      box-shadow: 0 12px 25px rgba(215,25,32,.22);
+      box-shadow: 0 14px 28px rgba(225,29,42,.26);
     }
 
     .load-more-container {
@@ -1373,7 +1501,7 @@
       font-size: 17px;
       cursor: pointer;
       z-index: 500;
-      box-shadow: 0 8px 25px rgba(215,25,32,.25);
+      box-shadow: 0 8px 25px rgba(225,29,42,.25);
       opacity: 0;
       visibility: hidden;
       transition: .3s ease;
@@ -1411,8 +1539,9 @@
       .header-center-info .eyebrow { font-size: 12px; }
       .header-center-info .tagline { font-size: 13px; }
       .header-search { width: 100%; }
-      nav ul { justify-content: flex-start; padding: 6px 10px; }
-      nav li a { padding: 8px 13px; font-size: 12px; }
+      nav ul { justify-content: flex-start; padding: 0 10px; }
+      nav li a { padding: 12px 13px; font-size: 12px; }
+      nav li a::after { left: 13px; right: 13px; }
       .ticker-label { padding: 0 12px; font-size: 10px; }
       .ticker-text span { padding: 0 18px; font-size: 11.5px; }
       .container { margin-top: 20px; padding: 0 12px; }
@@ -1422,7 +1551,7 @@
       .hero-main .kicker-wrap, .hero-main .dek { padding-left: 16px; padding-right: 16px; }
       .split-section { grid-template-columns: 1fr; }
       .card-grid { grid-template-columns: 1fr; gap: 16px; }
-      .card > img, .card > .ph, .card .img-wrapper, .card .img-wrapper img, .card .img-wrapper .ph { height: 205px; }
+      .card > img, .card > .ph, .card-media, .card-media img, .card-media .ph, .card-media .img-wrapper, .card-media .img-wrapper img, .card-media .img-wrapper .ph { height: 205px; }
       .side-item { min-height: 95px; }
       .side-item .img-wrapper, .side-item img, .side-item .ph { width: 80px; height: 80px; }
       .modal-box { padding: 20px; border-radius: 17px; }
@@ -1547,7 +1676,6 @@
     </section>
 
     <div id="ad-slot-2" class="ad-slot-container"></div>
-    <div id="ad-slot-3" class="ad-slot-container"></div>
 
     <section class="body-block">
       <div class="section-header-box">
@@ -1568,6 +1696,8 @@
         </div>
       </div>
     </section>
+
+    <div id="ad-slot-3" class="ad-slot-container"></div>
 
     <div id="ad-slot-4" class="ad-slot-container"></div>
   </div>
@@ -1686,10 +1816,20 @@ const STORAGE_KEY = "site-data";
 
 const categories = ['ප්‍රධාන පුවත්', 'ක්‍රීඩා', 'ව්‍යාපාර', 'ලෝකය', 'තාක්ෂණය'];
 
+const categoryIcons = {
+  'home': 'fa-house',
+  'ක්‍රීඩා': 'fa-trophy',
+  'ව්‍යාපාර': 'fa-briefcase',
+  'ලෝකය': 'fa-earth-asia',
+  'තාක්ෂණය': 'fa-microchip'
+};
+
 let siteData = { ticker:[], articles:[], ads:[] };
 let currentCat = 'home';
 let categoryFilteredArticles = [];
 let showOlderArticlesState = false;
+let modalCurrentId = null;
+let modalRelatedOffset = 4;
 
 /* PRELOADER CONTROLLER */
 function dismissPreloader(){
@@ -1698,7 +1838,7 @@ function dismissPreloader(){
     preloader.classList.add('fade-out');
   }
 }
-setTimeout(dismissPreloader, 1000);
+setTimeout(dismissPreloader, 500);
 
 /* HEADER BACKGROUND SLIDER */
 function updateHeaderBackgrounds(articles){
@@ -1857,39 +1997,115 @@ function updateDate(){
   document.getElementById('year').textContent = d.getFullYear();
 }
 
-/* DATA FETCHING */
-async function loadData(){
-  if(SCRIPT_URL && SCRIPT_URL.trim() !== ""){
-    try{
-      const res = await fetch(SCRIPT_URL, { method:'GET', redirect:'follow' });
-      const json = await res.json();
-      if(json && (json.articles || json.ticker)){
-        siteData = {
-          ticker: json.ticker || [],
-          articles: orderNewestFirst(sanitizeArticles(json.articles)),
-          ads: json.ads || []
-        };
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(siteData));
-        renderSite();
-        updateHeaderBackgrounds(siteData.articles);
-        applySavedLanguage();
-        return;
-      }
-    }catch(e){
-      console.error('Sheet fetch error:', e);
+/* SKELETON LOADERS — shown instantly while news is being fetched */
+function renderHeroSkeleton(){
+  const heroEl = document.getElementById('heroSection');
+  if(!heroEl) return;
+  heroEl.innerHTML = `
+    <div class="sk-hero-main">
+      <div class="sk-img skeleton-shimmer"></div>
+      <div class="sk-line skeleton-shimmer w60"></div>
+      <div class="sk-line skeleton-shimmer w90"></div>
+    </div>
+    <aside class="hero-side">
+      ${Array.from({length:4}).map(()=>`
+        <div class="sk-side-item">
+          <div class="sk-thumb skeleton-shimmer"></div>
+          <div class="sk-lines">
+            <div class="sk-line skeleton-shimmer w70"></div>
+            <div class="sk-line skeleton-shimmer w40"></div>
+          </div>
+        </div>
+      `).join('')}
+    </aside>
+  `;
+}
+
+function renderStripSkeleton(elementId, rows){
+  const el = document.getElementById(elementId);
+  if(!el) return;
+  el.innerHTML = Array.from({length: rows || 5}).map(()=>`
+    <div class="sk-strip-row">
+      <div class="sk-line skeleton-shimmer"></div>
+    </div>
+  `).join('');
+}
+
+function renderInitialSkeletons(){
+  renderHeroSkeleton();
+  renderStripSkeleton('sportsList', 5);
+  renderStripSkeleton('bizList', 5);
+}
+
+/* DATA FETCHING — CACHE FIRST, THEN REFRESH IN BACKGROUND */
+function readCachedSiteData(){
+  try{
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if(!raw) return null;
+    const parsed = JSON.parse(raw);
+    return {
+      ticker: parsed.ticker || [],
+      articles: orderNewestFirst(sanitizeArticles(parsed.articles)),
+      ads: parsed.ads || []
+    };
+  }catch(e){
+    return null;
+  }
+}
+
+async function fetchFreshSiteData(timeoutMs){
+  if(!SCRIPT_URL || SCRIPT_URL.trim() === "") return null;
+
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs || 8000);
+
+  try{
+    const res = await fetch(SCRIPT_URL, { method:'GET', redirect:'follow', signal: controller.signal });
+    const json = await res.json();
+    clearTimeout(timer);
+    if(json && (json.articles || json.ticker)){
+      return {
+        ticker: json.ticker || [],
+        articles: orderNewestFirst(sanitizeArticles(json.articles)),
+        ads: json.ads || []
+      };
     }
+    return null;
+  }catch(e){
+    clearTimeout(timer);
+    console.error('Sheet fetch error:', e);
+    return null;
+  }
+}
+
+async function loadData(){
+  /* STEP 1 — render whatever is cached locally right away (near-instant, no network wait) */
+  const cached = readCachedSiteData();
+  if(cached){
+    siteData = cached;
+    renderSite();
+    updateHeaderBackgrounds(siteData.articles);
+    applySavedLanguage();
   }
 
-  const raw = localStorage.getItem(STORAGE_KEY);
-  const parsed = raw ? JSON.parse(raw) : { ticker:[], articles:[], ads:[] };
-  siteData = {
-    ticker: parsed.ticker || [],
-    articles: orderNewestFirst(sanitizeArticles(parsed.articles)),
-    ads: parsed.ads || []
-  };
-  renderSite();
-  updateHeaderBackgrounds(siteData.articles);
-  applySavedLanguage();
+  /* STEP 2 — fetch the latest news in the background and update quietly when it arrives */
+  const fresh = await fetchFreshSiteData(8000);
+  if(fresh){
+    siteData = fresh;
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(siteData));
+    renderSite();
+    updateHeaderBackgrounds(siteData.articles);
+    applySavedLanguage();
+    return;
+  }
+
+  /* STEP 3 — no cache and no fresh data (first-ever visit with a slow/failed fetch) */
+  if(!cached){
+    siteData = { ticker:[], articles:[], ads:[] };
+    renderSite();
+    updateHeaderBackgrounds(siteData.articles);
+    applySavedLanguage();
+  }
 }
 
 /* UTILITIES */
@@ -2006,7 +2222,8 @@ function buildNav(){
   const nav = document.getElementById('navList');
   nav.innerHTML = categories.map((c,i)=>{
     const key = (i === 0) ? 'home' : c;
-    return `<li data-navkey="${esc(key)}"><a onclick="navigateTo('${esc(key)}')">${esc(c)}</a></li>`;
+    const icon = categoryIcons[key] || 'fa-newspaper';
+    return `<li data-navkey="${esc(key)}"><a onclick="navigateTo('${esc(key)}')"><i class="fa-solid ${icon}"></i>${esc(c)}</a></li>`;
   }).join('');
 }
 
@@ -2034,10 +2251,12 @@ function navigateTo(catKey){
 function renderCardHtml(a){
   return `
     <article class="card" onclick="openModal('${esc(a.id)}')">
-      ${renderImageHtml(a)}
-      <div class="meta-bar">
-        <span class="kicker">${esc(a.category)}</span>
-        ${a.time ? `<span class="time-badge">🕒 ${esc(a.time)}</span>` : ''}
+      <div class="card-media">
+        ${renderImageHtml(a)}
+        <div class="meta-bar">
+          <span class="kicker">${esc(a.category)}</span>
+          ${a.time ? `<span class="time-badge">🕒 ${esc(a.time)}</span>` : ''}
+        </div>
       </div>
       <h3>${esc(a.title)}</h3>
       <p>${esc(a.desc)}</p>
@@ -2162,17 +2381,52 @@ function copyArticleLink(url){
   });
 }
 
+function buildRelatedCardHtml(item){
+  return `
+    <div class="modal-related-card" onclick="openModal('${esc(item.id)}')">
+      ${renderImageHtml(item, 'modal-rel-img')}
+      <div>
+        <h4>${esc(item.title)}</h4>
+        ${item.time ? `<span style="font-size:10.5px;color:var(--muted);display:block;margin-top:4px;">🕒 ${esc(item.time)}</span>` : ''}
+      </div>
+    </div>
+  `;
+}
+
+function loadMoreRelatedNews(){
+  if(!modalCurrentId) return;
+  const otherArticles = (siteData.articles || []).filter(x => String(x.id) !== String(modalCurrentId));
+  const prevOffset = modalRelatedOffset;
+  modalRelatedOffset += 4;
+
+  const newItems = otherArticles.slice(prevOffset, modalRelatedOffset);
+  const grid = document.getElementById('modalRelatedGrid');
+  if(grid && newItems.length){
+    grid.insertAdjacentHTML('beforeend', newItems.map(buildRelatedCardHtml).join(''));
+  }
+
+  const wrap = document.getElementById('modalLoadMoreWrap');
+  if(wrap && modalRelatedOffset >= otherArticles.length){
+    wrap.style.display = 'none';
+  }
+}
+
 function openModal(id){
   const a = siteData.articles.find(x => String(x.id) === String(id));
   if(!a) return;
+
+  modalCurrentId = id;
+  modalRelatedOffset = 4;
 
   const ytEmbed = getYouTubeEmbedUrl(getArticleYouTubeLink(a));
   const imgSrc = getArticleImage(a);
   const currentUrl = window.location.href;
   const shareText = encodeURIComponent(a.title);
 
-  /* LOAD OTHER NEWS BELOW THIS ARTICLE */
-  const otherArticles = (siteData.articles || []).filter(x => String(x.id) !== String(id)).slice(0, 4);
+  /* LOAD OTHER NEWS BELOW THIS ARTICLE — with a "load more" control */
+  const otherArticles = (siteData.articles || []).filter(x => String(x.id) !== String(id));
+  const initialRelated = otherArticles.slice(0, modalRelatedOffset);
+  const hasMoreRelated = otherArticles.length > modalRelatedOffset;
 
   let relatedHtml = '';
   if(otherArticles.length > 0){
@@ -2181,20 +2435,22 @@ function openModal(id){
         <div class="modal-related-title">
           <i class="fa-solid fa-layer-group" style="color:var(--primary);"></i> වෙනත් නවතම පුවත්
         </div>
-        <div class="modal-related-grid">
-          ${otherArticles.map(item => `
-            <div class="modal-related-card" onclick="openModal('${esc(item.id)}')">
-              ${renderImageHtml(item, 'modal-rel-img')}
-              <div>
-                <h4>${esc(item.title)}</h4>
-                ${item.time ? `<span style="font-size:10.5px;color:var(--muted);display:block;margin-top:4px;">🕒 ${esc(item.time)}</span>` : ''}
-              </div>
-            </div>
-          `).join('')}
+        <div class="modal-related-grid" id="modalRelatedGrid">
+          ${initialRelated.map(buildRelatedCardHtml).join('')}
+        </div>
+        <div id="modalLoadMoreWrap" style="text-align:center;margin-top:16px;${hasMoreRelated ? '' : 'display:none;'}">
+          <button class="load-more-btn" onclick="loadMoreRelatedNews()">තව පුවත් පෙන්වන්න 📰</button>
         </div>
       </div>
     `;
   }
+
+  /* BACK TO MAIN PAGE — shown at the very end of the popup */
+  const backToMainHtml = `
+    <div style="text-align:center;margin-top:26px;padding-top:20px;border-top:2px dashed var(--border);">
+      <button class="back-btn" style="margin-bottom:0;" onclick="closeModal(); navigateTo('home');">← ප්‍රධාන පිටුවට යන්න</button>
+    </div>
+  `;
 
   /* POPUP SHARE SECTION */
   const shareHtml = `
@@ -2229,6 +2485,7 @@ function openModal(id){
     <div style="margin-top:16px;font-size:14px;color:var(--text-2);line-height:1.9;white-space:pre-line;">${esc(a.desc)}</div>
     ${shareHtml}
     ${relatedHtml}
+    ${backToMainHtml}
   `;
   showGenericModal(content);
 }
@@ -2291,6 +2548,8 @@ function closeModal(){
   document.getElementById('articleModal').classList.remove('active');
   document.body.style.overflow = '';
   document.getElementById('modalContent').innerHTML = '';
+  modalCurrentId = null;
+  modalRelatedOffset = 4;
 }
 
 document.getElementById('articleModal').addEventListener('click', function(e){
@@ -2340,6 +2599,7 @@ buildNav();
 updateDate();
 initActiveLanguage();
 fetchColomboWeather();
+renderInitialSkeletons();
 loadData();
 
 </script>
